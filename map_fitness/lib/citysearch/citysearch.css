@@ -1,0 +1,96 @@
+
+.mz-citysearch {
+  pointer-events: auto;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 250px;
+  height: 26px;
+  z-index: 10020;
+}
+
+.mz-citysearch input {
+  width: 210px;
+}
+
+@media only screen and (max-width: 820px) {
+  .mz-citysearch {
+    width: 26px;
+  }
+}
+
+.mz-citysearch.js--mz-citysearch-expanded {
+  width: 250px;
+}
+
+.js--mz-citysearch-select2 {
+  width: 100%;
+}
+
+.select2-container {
+  display: block;
+  width: auto !important;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.select2-container .select2-selection--single {
+  height: 26px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  border: 0;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 26px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 24px;
+}
+
+.select2-search--dropdown {
+  padding: 0;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border: 0;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+  line-height: 26px;
+  font-size: 16px;
+  padding: 0 6px;
+}
+
+.select2-dropdown {
+  border: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.65);
+  z-index: 10020;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-right: 26px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2215.991%22%20viewBox%3D%220%200%2016%2015.991%22%3E%3Cpath%20fill%3D%22%23454545%22%20d%3D%22M15.5%2014.71l-4.326-4.326c.87-1.047%201.393-2.39%201.393-3.854%200-3.332-2.7-6.034-6.032-6.034S.5%203.196.5%206.53s2.702%206.03%206.034%206.03c1.465%200%202.808-.522%203.854-1.392l4.327%204.326.785-.784zM1.136%206.53c0-2.98%202.42-5.398%205.398-5.398%202.976%200%205.397%202.42%205.397%205.397%200%202.975-2.42%205.396-5.396%205.396-2.978%200-5.398-2.42-5.398-5.397z%22%2F%3E%3C%2Fsvg%3E);
+  height: 26px;
+  width: 26px;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 0;
+  top: 0;
+  right: 0;
+  margin: 0;
+  left: auto;
+  margin-top: -1px;
+}
+
+@media only screen and (max-width: 820px) {
+  .select2-container .select2-selection--single .select2-selection__rendered {
+    display: none;
+  }
+
+  .mz-citysearch.js--mz-citysearch-expanded .select2-selection--single .select2-selection__rendered {
+    display: block;
+  }
+}
