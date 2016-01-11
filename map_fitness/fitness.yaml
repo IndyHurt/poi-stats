@@ -4,7 +4,7 @@
 cameras:
     camera1:
         type: perspective
-        position: [114.1376, 22.2859, 16] # lon/lat for Hong Kong at zoom 16
+        position: [-122.452890, 37.766408, 16] # lon/lat for area in San Francisco at zoom 16
 
 labels-global:
     - &text_visible_continent         true
