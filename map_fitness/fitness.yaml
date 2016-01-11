@@ -696,12 +696,12 @@ scene:
         color: *scene1
 
 layers:
-    # Special overlay for New Years Resolutions series
+    # Special overlay for New Years Resolutions posts 
     fitness:
-        data: { source: osm, layer: [fitness] }
+        data: { source: osm, layer: [pois] }
         filter: 
             all:
-                - kind: [fitness]    #[false,building,commercial,residential,warehouse,public,dormitory]
+                - kind: [leisure]    #[false,building,commercial,residential,warehouse,public,dormitory]
                 - label_placement: [yes]
         draw:
             icons:
@@ -744,12 +744,12 @@ layers:
     
 
     fitness_to_enhance:
-        data: { source: osm, layer: [fitness] }
+        data: { source: osm, layer: [pois] }
         filter:
             all:
                 - name: false
-                - $geometry: [polygon]
-                - kind: [fitness]
+                - $geometry: [point]
+                - kind: [leisure]
         draw:
             polygons:
                 color: aqua
