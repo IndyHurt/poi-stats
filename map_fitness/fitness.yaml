@@ -696,17 +696,17 @@ scene:
         color: *scene1
 
 layers:
-    # Special overlay for Targeted Editing series
-    buildings:
-        data: { source: osm, layer: [buildings] }
+    # Special overlay for New Years Resolutions series
+    fitness:
+        data: { source: osm, layer: [fitness] }
         filter: 
             all:
-                - kind: [residential, apartments]    #[false,building,commercial,residential,warehouse,public,dormitory]
+                - kind: [fitness]    #[false,building,commercial,residential,warehouse,public,dormitory]
                 - label_placement: [yes]
         draw:
             icons:
                 size: [[13, 14px], [16, 16px], [19, 20px]]
-                sprite: building
+                sprite: fitness
                 interactive: true
                 order: 100
                 color: white
@@ -730,7 +730,7 @@ layers:
                 name: true
             draw:
                 icons:
-                    sprite: building
+                    sprite: fitness
                     color: aqua
                     visible: true
                     priority: 1
@@ -741,50 +741,15 @@ layers:
                     font:
                         fill: black
                         stroke: { color: '#00ffff', width: 4 }
-    buildings-good:
-        data: { source: osm, layer: [buildings] }
-        filter:
-            all:
-                - name: true
-                - kind: [residential, apartments]
-        draw:
-            polygons:
-                color:  '#bdadbf'
-                order: function() { if( $zoom < 17) { return 14; } else { return 12; } }
-                interactive: true
-            outline:
-                style: lines
-                order: 10
-                color: '#d534df'
-                width: [[14,0.1px],[15,0.5px],[17,0.5px],[18,0.75px],[19,0.25m]]
-        labels:
-            filter: { $geometry: [point], $zoom: { min: 16 } }
-            draw:
-                text:
-                    interactive: false
-                    move_into_tile: true
-                    order: 101
-                    priority: 4
-                    visible: true
-                    font:
-                        family: Helvetica
-                        weight: 500
-                        style: italic
-                        fill: '#8c50c4'
-                        size: 12px
-                        stroke: { color: '#cdbbd7', width: 2 }
+    
 
-    buildings-bad:
-        data: { source: osm, layer: [buildings] }
+    fitness_to_enhance:
+        data: { source: osm, layer: [fitness] }
         filter:
             all:
                 - name: false
                 - $geometry: [polygon]
-                - kind: [residential, apartments]
-#            any:
-#                # small buildings tend to be houses, not multi-unit buildings
-#                - { area: { min: 1000 } }
-#                - { volume: { min: 20000 } }
+                - kind: [fitness]
         draw:
             polygons:
                 color: aqua
@@ -1947,37 +1912,7 @@ layers:
                             fill: *text_fill
                             size: 12px
                             stroke: { color: *text_stroke_road4, width: 4 }
-#        airport-lines:
-#            filter: { kind: minor_road, aeroway: [runway,taxiway] }
-#            draw:
-#                lines:
-#                    order: 10
-#                    color: *grey2
-#                    cap: butt
-#                    width: [[10, 1px], [11, 1.5px], [12, 2px], [13, 4px], [14, 8px], [15, 16px], [16, 32px], [17, 60m]]
-#            # Features come in at zoom 9, but include mostly minor airports without POIs until z13
-#            early:
-#                filter: { $zoom: { max: 12 }, not: { landuse_kind: [aerodrome, runway, taxiway] } }
-#                draw:
-#                    lines:
-#                        visible: false
-#            not-round:
-#                filter: { $zoom: { min: 17 } }
-#                draw:
-#                    lines:
-#                        cap: butt
-#            taxiway:
-#                filter: { aeroway: taxiway }
-#                draw:
-#                    lines:
-#                        order: 9
-#                        color: *grey4
-#                        width: [[14, 1px], [15, 1.5px], [16, 8m]]
-#                early:
-#                    filter: { $zoom: { max: 14 } }
-#                    draw:
-#                        lines:
-#                            visible: false
+
         ferry:
             filter: { kind: ferry }
             draw:
@@ -2260,14 +2195,6 @@ layers:
                     lines:
                         visible: false
 
-#        subregions:
-#            filter: { kind: county, $zoom: { min: 10 } }
-#            draw:
-#                lines:
-#                    interactive: true
-#                    order: 6
-#                    color: *subregion_boundary
-#                    width: [[9, 1px], [14, 2px], [16, 3px], [17, 8m]]
 
     places:
         data: { source: osm, layer: places }
