@@ -748,7 +748,7 @@ layers:
         filter:
             all:
                 - name: false
-                - $geometry: [point]
+                - $geometry: [point, polygon]
                 - kind: [leisure]
         draw:
             polygons:
