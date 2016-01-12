@@ -19,10 +19,10 @@ labels-global:
     - &icon_visible_landuse_green     false
     - &text_visible_landuse_green     true
     - &label_visible_poi_landuse      true
-    - &icon_visible_poi_landuse       true
-    - &text_visible_poi_landuse       true
+    - &icon_visible_poi_landuse       false
+    - &text_visible_poi_landuse       false
     - &label_visible_poi_landuse_e    true
-    - &icon_visible_poi_landuse_e     true
+    - &icon_visible_poi_landuse_e     false
     - &text_visible_poi_landuse_e     true
     - &label_visible_station          false
     - &icon_visible_station           false
@@ -448,7 +448,8 @@ textures:
 sources:
     osm:
         type: TopoJSONTiles
-        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-oKkMAOE
+        #url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-oKkMAOE
+        url:  //vector.dev.mapzen.com/osm/all/{z}/{x}/{y}.topojson
 
 camera:
     type: isometric
@@ -700,8 +701,8 @@ layers:
         data: { source: osm, layer: [pois] }
         filter: 
             all:
-                - kind: [leisure]    #[false,building,commercial,residential,warehouse,public,dormitory]
-                - label_placement: [yes]
+                - kind: [sports_centre, fitness_centre, fitness_station, gym, fitness]    #[false,building,commercial,residential,warehouse,public,dormitory]
+               # - label_placement: [yes]
         draw:
             icons:
                 size: [[13, 14px], [16, 16px], [19, 20px]]
@@ -726,7 +727,7 @@ layers:
                     stroke: { color: '#cdbbd7', width: 2 }
         matched:
             filter:
-                name: true
+                name: false
             draw:
                 icons:
                     sprite: fitness
@@ -740,15 +741,14 @@ layers:
                     font:
                         fill: black
                         stroke: { color: '#00ffff', width: 4 }
-    
 
     fitness_to_enhance:
-        data: { source: osm, layer: [pois] }
+        data: { source: osm, layer: [pois, buildings] }
         filter:
             all:
                 - name: false
                 - $geometry: [point, polygon]
-                - kind: [leisure]
+                - kind: [sports_centre, fitness_centre, fitness_station, gym, fitness]    #[false,building,commercial,residential,warehouse,public,dormitory]
         draw:
             polygons:
                 color: aqua

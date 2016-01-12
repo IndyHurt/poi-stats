@@ -7,7 +7,7 @@ map = (function () {
 
     // defaults
     var map_start_location = [0, 0, 2]; // world
-    var style_file = 'buildings.yaml';
+    var style_file = 'fitness.yaml';
 
     /*** URL parsing ***/
 
@@ -104,7 +104,7 @@ map = (function () {
                 var position = '19' + '/' + latlng[0] + '/' + latlng[1];
 
                 if (scene.selection.feature && scene.selection.feature.properties.id) {
-                    url += 'way=' + scene.selection.feature.properties.id + '#map=' + position;
+                    url += 'node=' + scene.selection.feature.properties.id + '#map=' + position;
                 }
 
                 var josmUrl = 'http://www.openstreetmap.org/edit?editor=remote#map='+position;
@@ -124,11 +124,11 @@ map = (function () {
                 popup.style.left = (pixel.x + 0) + 'px';
                 popup.style.top = (pixel.y + 0) + 'px';
                 
-                if ( (scene.selection.feature.properties.kind == 'residential' || scene.selection.feature.properties.kind == 'apartments') && !scene.selection.feature.properties.name ) 
+                if ( (scene.selection.feature.properties.kind == 'fitness' || scene.selection.feature.properties.kind == 'gym') && !scene.selection.feature.properties.name ) 
                 {
 	                popup.style.visibility = 'visible';
 	            }
-                popup.innerHTML = '<span class="labelInner">' + 'You found a building that needs help!' + '</span><br>';
+                popup.innerHTML = '<span class="labelInner">' + 'You found a gym to enhance!' + '</span><br>';
                 popup.innerHTML += '<span class="labelInner">' + '<a target="_blank" href="' + url + '" onclick="trackOutboundLink("' + url + ', residential_buildings"); return false;">Edit with iD ➹</a>' + '</span><br>';
                 popup.innerHTML += '<span class="labelInner">' + '<a target="_blank" href="' + josmUrl + '" onclick="trackOutboundLink("' + josmUrl + ', residential_buildings"); return false;">Edit with JOSM ➹</a>' + '</span><br>';
             });
