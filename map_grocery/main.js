@@ -124,7 +124,7 @@ map = (function () {
                 popup.style.left = (pixel.x + 0) + 'px';
                 popup.style.top = (pixel.y + 0) + 'px';
                 
-                if ( (scene.selection.feature.properties.kind == 'fitness' || scene.selection.feature.properties.kind == 'gym') && !scene.selection.feature.properties.name ) 
+                if ( scene.selection.feature.properties.kind == 'grocery' || scene.selection.feature.properties.kind == 'grocery' ) 
                 {
 	                popup.style.visibility = 'visible';
 	            }
