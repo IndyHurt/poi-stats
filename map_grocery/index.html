@@ -1,0 +1,158 @@
+<!doctype html>
+<!--
+    Tangram: real-time WebGL rendering for OpenStreetMap
+
+    http://github.com/tangrams/tangram
+    http://mapzen.com
+-->
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grocery POIs</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            background: rgba(0, 0, 0, 0);
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+
+
+    .label {
+        width: auto;
+        /*margin-left: -100px;*/
+        position: absolute;
+        z-index: 1000;
+        text-align: left;
+        margin: 0px;
+        background: #333;
+        opacity: 0.9;
+        padding: 2px;
+        visibility: hidden;
+        /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+        /*word-wrap: break-word;*/
+    }
+    .label a {
+        color: white;
+    }
+
+    .label a:hover {
+        color: lightblue;
+    }
+
+    .labelInner {
+        padding: 3px 0px;
+        font-family: Helvetica, sans-serif;
+        font-size: 16px;
+        color: white;
+        opacity: 2.0;
+        margin: 5px;
+    }
+
+    .labelLine {
+        /*border: 2px solid gold;*/
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="label" id="info"></div>
+    <div class="label" id="popup"></div>
+    <div id="map"></div>
+
+    <!-- 3rd party libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
+    <!-- bog-standard leaflet URL hash -->
+    <script src="lib/leaflet-hash.js"></script>
+    <!-- A lightweight graphical user interface for changing variables in JavaScript.  -->
+    <script src="lib/dat.gui.min.js"></script>
+    <!-- End of 3rd party libraries -->
+
+    <!-- Keymaster handles keyboard input -->
+    <script src="lib/keymaster.js"></script>
+
+    <!-- Main tangram library -->
+    <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
+    
+    <!-- Demo module -->
+    <script src="main.js"></script>
+
+    <!-- Adding a script block to post message to the parent container (think iframed demos) -->
+    <script type="text/javascript">
+      window.addEventListener("hashchange",function(){parent.postMessage(window.location.hash, "*")});
+    </script>
+
+    <!-- Mapzen map UI -->
+<!-- 
+    <script src='lib/mapzen-ui.min.js'></script>
+ -->
+    <script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/mapzen-ui.min.js'></script>
+    <script>
+      MPZN.bug({
+          name: 'Tangram',
+          link: 'https://mapzen.com/blog/new-years-resolutions-groceries',
+          tweet: 'New Years Resolutions - Grocery, a map from @mapzen',
+          repo: 'https://github.com/indyhurt/poi-stats/'
+    });
+    </script>
+	<script>
+	/**
+	* Function that tracks a click on an outbound link in Google Analytics.
+	* This function takes a valid URL string as an argument, and uses that URL string
+	* as the event label. Setting the transport method to 'beacon' lets the hit be sent
+	* using 'navigator.sendBeacon' in browser that support it.
+	*/
+	var trackOutboundLink = function(url, post_name) {
+       // ga('send', 'event', [eventCategory], [eventAction], [eventLabel], [eventValue], [fieldsObject]);
+	   ga('send', 'event', 'outbound_new_years_resolutions_fitness', post_name, url, {
+		 'transport': 'beacon',
+		 'hitCallback': function(){document.location = url;}
+	   });
+	}
+	</script>
+    
+
+    <style>
+    @media (min-width: 600px) {
+        /* enlarge dat.gui */
+        .dg {
+            font-size: 12pt;
+        }
+        .dg li:not(.folder) {
+            height: 40px;
+            line-height: 40px;
+        }
+        .dg .c .slider {
+            height: 30px;   
+        }
+        .dg .c input[type=text] {
+            font-size: 12pt;
+            height: 24px;   
+        }
+    }
+    @media (max-width: 599px) {
+        /*shrink dat.gui*/
+        .dg.main {
+            font-size: 10pt;
+            margin-top: 50px;
+            width: 200px !important;
+        }
+        .dg.main .close-button {
+            width: 200px !important;
+        }
+    }
+    </style>
+  </body>
+</html>
