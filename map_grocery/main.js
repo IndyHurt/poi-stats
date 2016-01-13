@@ -124,7 +124,7 @@ map = (function () {
                 popup.style.left = (pixel.x + 0) + 'px';
                 popup.style.top = (pixel.y + 0) + 'px';
                 
-                if ( scene.selection.feature.properties.kind == 'grocery' || scene.selection.feature.properties.kind == 'grocery' ) 
+                if ( scene.selection.feature.properties.kind == [supermarket, grocery-store, health_food, greengrocer] || scene.selection.feature.properties.kind == [supermarket, grocery-store, health_food, greengrocer] ) 
                 {
 	                popup.style.visibility = 'visible';
 	            }
