@@ -759,6 +759,11 @@ layers:
                 order: 100
                 join: round
                 width: [[13,2px],[15,1.5px],[17,2.0px],[18,2.5px],[19,2m]]
+        draw:
+            points:
+                color: aqua
+                order: 101
+                interactive: true        
 
     # Map overlays for styling the server response (using special source layer names) for route line, find_me location gem, and search result pins
     route:
