@@ -745,7 +745,7 @@ layers:
         data: { source: osm, layer: [pois, buildings] }
         filter:
             all:
-                - name: false
+                #- name: false
                 - $geometry: [point, polygon]
                 - kind: [supermarket, grocery-store, health_food, greengrocer]    #[false,building,commercial,residential,warehouse,public,dormitory]
         draw:
