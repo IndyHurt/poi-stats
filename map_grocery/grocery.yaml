@@ -716,7 +716,7 @@ layers:
                 order: 101
                 priority: 4
                 visible: true
-                text_source: function() { if( feature.name ) { return feature.name; } else { return 'Enhance Feature'; } }
+                #text_source: function() { if( feature.name ) { return feature.name; } else { return 'Enhance Feature'; } }
                 font:
                     family: Helvetica
                     weight: 500
