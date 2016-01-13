@@ -3,7 +3,7 @@
 cameras:
     camera1:
         type: perspective
-        position: [-122.452916, 37.766399, 16] # lon/lat for area in San Francisco at zoom 16
+        position: [-122.410854, 37.769427, 16] # lon/lat for area in San Francisco at zoom 16
 
 labels-global:
     - &text_visible_continent         true
