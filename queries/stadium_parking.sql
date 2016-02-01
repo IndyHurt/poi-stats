@@ -33,12 +33,19 @@ create table stadium_parking_with_aisles as select distinct stadium_parking_poly
 -- Create a table to store the number of stadiums and percentages with parking and parking aisles
 drop table if exists stadium_eval;
 create table stadium_eval (query_name text, value real);
+
 insert into stadium_eval (query_name, value) values ('stadium_polygons', (select count (*) from stadium_polygons));
+
 insert into stadium_eval (query_name, value) values ('stadium_parking_polygons', (select count (*) from stadium_parking_polygons));
+
 insert into stadium_eval (query_name, value) values ('stadium_parking_with_aisles', (select count(*) from stadium_parking_with_aisles));
+
 insert into stadium_eval (query_name, value) values ('stadium_without_parking_nearby', (select count(*) from stadiums_without_nearby_parking));
-insert into stadium_eval (query_name, value) values ('stadium_without_nearby_parking_pct', (((select value from stadium_eval where query_name = 'stadiums_without_nearby_parking')/(select value from stadium_eval where query_name = 'stadiums_polygons'))*100));
+
+insert into stadium_eval (query_name, value) values ('stadium_without_nearby_parking_pct', (((select value from stadium_eval where query_name = 'stadium_without_parking_nearby')/(select value from stadium_eval where query_name = 'stadium_polygons'))*100)); 
+
 insert into stadium_eval (query_name, value) values ('stadium_with_parking_polygons_pct', (((select value from stadium_eval where query_name = 'stadium_parking_polygons')/(select value from stadium_eval where query_name = 'stadium_polygons'))*100));
+
 insert into stadium_eval (query_name, value) values ('stadium_with_parking_polygons_and_aisles_pct', (((select value from stadium_eval where query_name = 'stadium_parking_with_aisles')/(select value from stadium_eval where query_name = 'stadium_polygons'))*100));
 
 select * from stadium_eval;
