@@ -33,8 +33,8 @@ create table stadium_eval (query_name text, value real);
 insert into stadium_eval (query_name, value) values ('stadium_polygons', (select count (*) from stadium_polygons));
 insert into stadium_eval (query_name, value) values ('stadium_without_parking_nearby', (select count(*) from stadiums_without_nearby_parking));
 insert into stadium_eval (query_name, value) values ('stadium_without_parking_aisles_nearby', (select count(*) from stadiums_without_nearby_parking_aisles));
-insert into stadium_eval (query_name, value) values ('stadium_without_nearby_parking_pct', (((select value from stadium_eval where query_name = 'stadium_without_parking_nearby')/(select value from stadium_eval where query_name = 'stadium_polygons'))*100)); 
-insert into stadium_eval (query_name, value) values ('stadium_without_nearby_parking_aisles_pct', (((select value from stadium_eval where query_name = 'stadium_without_parking_aisles_nearby')/(select value from stadium_eval where query_name = 'stadium_polygons'))*100));
+insert into stadium_eval (query_name, value) values ('stadium_with_nearby_parking_pct', ((1 -(select value from stadium_eval where query_name = 'stadium_without_parking_nearby')/(select value from stadium_eval where query_name = 'stadium_polygons'))*100)); 
+insert into stadium_eval (query_name, value) values ('stadium_with_nearby_parking_aisles_pct', ((1 -(select value from stadium_eval where query_name = 'stadium_without_parking_aisles_nearby')/(select value from stadium_eval where query_name = 'stadium_polygons'))*100));
 
 
 select * from stadium_eval;
