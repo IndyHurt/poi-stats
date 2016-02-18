@@ -10,6 +10,14 @@ create table parking_polygons as select osm_id, name, landuse, amenity, tags, wa
 drop table if exists parking_aisles;
 create table parking_aisles as select osm_id, name, amenity, highway, service, tags, way from planet_osm_line where osm_id > 0 and service = 'parking_aisle';
 
+-- Create indices to speed up queries
+analyze parking_polygons;
+analyze stadium_polygons;
+
+create index parking_polygons_gist_idx on parking_polygons using gist(way);
+create index parking_aisles_gist_idx on parking_aisles using gist(way);
+
+
 -- Create a table of stadiums that do not have any parking polygons within 100 meters (about 330 ft) 
 drop table if exists stadiums_without_nearby_parking;
 create table stadiums_without_nearby_parking as 
