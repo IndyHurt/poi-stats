@@ -14,12 +14,16 @@ select railway, count(*) as total, sum(st_length(way))/1000 as km_ways, count(ta
 num_colour, count(tags->'color') as num_color from planet_osm_line
 where railway in ('rail', 'subway', 'light_rail') and osm_id > 0 group by railway;
 
+select * from transit_railway_ways;
+
 -- Identifying transit related colors associated with the railway tag on relations
 drop table if exists transit_railway_relations;
 create table transit_railway_relations as
 select railway, count(*) as total, sum(st_length(way))/1000 as km_relations, count(tags->'colour') as
 num_colour, count(tags->'color') as num_color from planet_osm_line
 where railway in ('rail', 'subway', 'light_rail') and osm_id < 0 group by railway;
+
+select * from transit_railway_relations;
 
 -- Identifying transit related colors associated with the route tag on ways
 drop table if exists transit_route_ways;
@@ -29,6 +33,8 @@ num_colour, count(tags->'color') as num_color from planet_osm_line
 where route in ('rail', 'train', 'railway', 'subway', 'light_rail') and osm_id > 0
 group by route;
 
+select * from transit_route_ways;
+
 -- Identifying transit related colors associated with the route tag on relations
 drop table if exists transit_route_relations;
 create table transit_route_relations as
@@ -36,3 +42,5 @@ select route, count(*) as total, sum(st_length(way))/1000 as km_relations, count
 num_colour, count(tags->'color') as num_color from planet_osm_line
 where route in ('rail', 'train', 'railway', 'subway', 'light_rail') and osm_id < 0
 group by route;
+
+select * from transit_railway_ways;
