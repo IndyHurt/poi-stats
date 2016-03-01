@@ -31,4 +31,4 @@ insert into fitness (query_name, value) values ('fitness_with_website_pct', (((s
 
 insert into fitness (query_name, value) values ('fitness_with_hours_pct', (((select value from fitness where query_name = 'fitness_with_hours_total')/(select value from fitness where query_name = 'fitness_total')) *100));
 
-select * from fitness
+select * from fitness;
