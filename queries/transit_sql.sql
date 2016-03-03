@@ -87,9 +87,15 @@ insert into transit (query_name, value) values ('railway_all_color_rel_km_pct', 
 
 -- Investigating the Route key
 
--- Calculate the length of light rails, rails, railways, subways and trains associated with the route key for all ways
+-- Calculate the length of buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all ways
+
+insert into transit (query_name, value) values ('route_bus_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and osm_id > 0));
+
+insert into transit (query_name, value) values ('route_funicular_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and osm_id > 0));	
 
 insert into transit (query_name, value) values ('route_light_rail_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and osm_id > 0));
+
+insert into transit (query_name, value) values ('route_monorail_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and osm_id > 0));	
 
 insert into transit (query_name, value) values ('route_rail_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and osm_id > 0));
 
@@ -99,11 +105,21 @@ insert into transit (query_name, value) values ('route_subway_way_km', (select s
 
 insert into transit (query_name, value) values ('route_train_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and osm_id > 0));	
 
-insert into transit (query_name, value) values ('route_all_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('light_rail', 'rail', 'railway', 'subway', 'train') and osm_id > 0));
+insert into transit (query_name, value) values ('route_trolleybus_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and osm_id > 0));
 
--- Calculate the number of unique names for light rails, rails, railways, subways and trains associated with the route key for all ways - do the counts seem reasonable?  Extremely high numbers could mean inconsistant naming and spelling.
+insert into transit (query_name, value) values ('route_tram_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and osm_id > 0));	
+
+insert into transit (query_name, value) values ('route_all_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and osm_id > 0));
+
+-- Calculate the number of unique names for buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all ways - do the counts seem reasonable?  Extremely high numbers could mean inconsistant naming and spelling.
+
+insert into transit (query_name, value) values ('route_bus_way_names', (select count (distinct name) from planet_osm_line where route = 'bus' and name is not null and osm_id > 0));
+
+insert into transit (query_name, value) values ('route_funicular_way_names', (select count (distinct name) from planet_osm_line where route = 'funicular' and name is not null and osm_id > 0));	
 
 insert into transit (query_name, value) values ('route_light_rail_way_names', (select count (distinct name) from planet_osm_line where route = 'light_rail' and name is not null and osm_id > 0));
+
+insert into transit (query_name, value) values ('route_monorail_way_names', (select count (distinct name) from planet_osm_line where route = 'monorail' and name is not null and osm_id > 0));	
 
 insert into transit (query_name, value) values ('route_rail_way_names', (select count (distinct name) from planet_osm_line where route = 'rail' and name is not null and osm_id > 0));
 
@@ -111,13 +127,23 @@ insert into transit (query_name, value) values ('route_railway_way_names', (sele
 	
 insert into transit (query_name, value) values ('route_subway_way_names', (select count (distinct name) from planet_osm_line where route = 'subway' and name is not null and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_train_way_names', (select count (distinct name) from planet_osm_line where route = 'train' and name is not null and osm_id > 0));	
+insert into transit (query_name, value) values ('route_train_way_names', (select count (distinct name) from planet_osm_line where route = 'train' and name is not null and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_all_way_names', (select count (distinct name) from planet_osm_line where route in ('light_rail', 'rail', 'railway', 'subway', 'train') and name is not null and osm_id > 0));
+insert into transit (query_name, value) values ('route_trolleybus_way_names', (select count (distinct name) from planet_osm_line where route = 'trolleybus' and name is not null and osm_id > 0));	
 
---Calculate the length of light rails, rails, railways, subways and trains associated with the route key that also have the color tag for all ways
+insert into transit (query_name, value) values ('route_tram_way_names', (select count (distinct name) from planet_osm_line where route = 'tram' and name is not null and osm_id > 0));	
+
+insert into transit (query_name, value) values ('route_all_way_names', (select count (distinct name) from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and name is not null and osm_id > 0));
+
+--Calculate the length of buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key that also have the color tag for all ways
+
+insert into transit (query_name, value) values ('route_bus_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and (tags ?| array ['color', 'colour']) and osm_id > 0));
+
+insert into transit (query_name, value) values ('route_funicular_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and (tags ?| array ['color', 'colour']) and osm_id > 0));	
 
 insert into transit (query_name, value) values ('route_light_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and (tags ?| array ['color', 'colour']) and osm_id > 0));
+
+insert into transit (query_name, value) values ('route_monorail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and (tags ?| array ['color', 'colour']) and osm_id > 0));	
 
 insert into transit (query_name, value) values ('route_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and (tags ?| array ['color', 'colour']) and osm_id > 0));
 
@@ -125,13 +151,23 @@ insert into transit (query_name, value) values ('route_railway_color_way_km', (s
 	
 insert into transit (query_name, value) values ('route_subway_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'subway' and (tags ?| array ['color', 'colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_train_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and (tags ?| array ['color', 'colour']) and osm_id > 0));	
+insert into transit (query_name, value) values ('route_train_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and (tags ?| array ['color', 'colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_all_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('light_rail', 'rail', 'railway', 'subway', 'train') and (tags ?| array ['color', 'colour']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_trolleybus_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and (tags ?| array ['color', 'colour']) and osm_id > 0));	
 
---Calculate the percentage of length that has the color tag for llight rails, rails, railways, subways and trains associated with the route key for all ways
+insert into transit (query_name, value) values ('route_tram_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and (tags ?| array ['color', 'colour']) and osm_id > 0));	
+
+insert into transit (query_name, value) values ('route_all_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and (tags ?| array ['color', 'colour']) and osm_id > 0));
+
+--Calculate the percentage of length that has the color tag for buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all ways
+
+insert into transit (query_name, value) values ('route_bus_color_way_km_pct', (((select value from transit where query_name = 'route_bus_color_way_km')/(select value from transit where query_name = 'route_bus_way_km')) *100));
+
+insert into transit (query_name, value) values ('route_funicular_color_way_km_pct', (((select value from transit where query_name = 'route_funicular_color_way_km')/(select value from transit where query_name = 'route_funicular_way_km')) *100));	
 
 insert into transit (query_name, value) values ('route_light_rail_color_way_km_pct', (((select value from transit where query_name = 'route_light_rail_color_way_km')/(select value from transit where query_name = 'route_light_rail_way_km')) *100));
+
+insert into transit (query_name, value) values ('route_monorail_color_way_km_pct', (((select value from transit where query_name = 'route_monorail_color_way_km')/(select value from transit where query_name = 'route_monorail_way_km')) *100));	
 
 insert into transit (query_name, value) values ('route_rail_color_way_km_pct', (((select value from transit where query_name = 'route_rail_color_way_km')/(select value from transit where query_name = 'route_rail_way_km')) *100));
 
@@ -139,13 +175,21 @@ insert into transit (query_name, value) values ('route_railway_color_way_km_pct'
 	
 insert into transit (query_name, value) values ('route_subway_color_way_km_pct', (((select value from transit where query_name = 'route_subway_color_way_km')/(select value from transit where query_name = 'route_subway_way_km')) *100));
 	
-insert into transit (query_name, value) values ('route_train_color_way_km_pct', (((select value from transit where query_name = 'route_train_color_way_km')/(select value from transit where query_name = 'route_train_way_km')) *100));		
+insert into transit (query_name, value) values ('route_train_color_way_km_pct', (((select value from transit where query_name = 'route_train_color_way_km')/(select value from transit where query_name = 'route_train_way_km')) *100));	
+
+insert into transit (query_name, value) values ('route_trolleybus_color_way_km_pct', (((select value from transit where query_name = 'route_trolleybus_color_way_km')/(select value from transit where query_name = 'route_trolleybus_way_km')) *100));	
 
 insert into transit (query_name, value) values ('route_all_color_way_km_pct', (((select value from transit where query_name = 'route_all_color_way_km')/(select value from transit where query_name = 'route_all_way_km')) *100));
 
--- Calculate the length of light rails, rails, railways, subways and trains associated with the route key for all relations
+-- Calculate the length of buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all relations
+
+insert into transit (query_name, value) values ('route_bus_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and osm_id < 0));
+
+insert into transit (query_name, value) values ('route_funicular_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and osm_id < 0));	
 
 insert into transit (query_name, value) values ('route_light_rail_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and osm_id < 0));
+
+insert into transit (query_name, value) values ('route_monorail_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and osm_id < 0));	
 
 insert into transit (query_name, value) values ('route_rail_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and osm_id < 0));
 
@@ -153,13 +197,23 @@ insert into transit (query_name, value) values ('route_railway_rel_km', (select 
 	
 insert into transit (query_name, value) values ('route_subway_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'subway' and osm_id < 0));
 	
-insert into transit (query_name, value) values ('route_train_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and osm_id < 0));		
+insert into transit (query_name, value) values ('route_train_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and osm_id < 0));	
 
-insert into transit (query_name, value) values ('route_all_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('light_rail', 'rail', 'railway', 'subway', 'train') and osm_id < 0));
+insert into transit (query_name, value) values ('route_trolleybus_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and osm_id < 0));	
 
--- Calculate the number of unique names for light rails, rails, railways, subways and trains associated with the route key for all relations - do the counts seem reasonable?  Extremely high numbers could mean inconsistant naming and spelling.
+insert into transit (query_name, value) values ('route_tram_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and osm_id < 0));	
+
+insert into transit (query_name, value) values ('route_all_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and osm_id < 0));
+
+-- Calculate the number of unique names for buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all relations - do the counts seem reasonable?  Extremely high numbers could mean inconsistant naming and spelling.
+
+insert into transit (query_name, value) values ('route_bus_rel_names', (select count (distinct name) from planet_osm_line where route = 'bus' and name is not null and osm_id < 0));
+
+insert into transit (query_name, value) values ('route_funicular_rel_names', (select count (distinct name) from planet_osm_line where route = 'funicular' and name is not null and osm_id < 0));	
 
 insert into transit (query_name, value) values ('route_light_rail_rel_names', (select count (distinct name) from planet_osm_line where route = 'light_rail' and name is not null and osm_id < 0));
+
+insert into transit (query_name, value) values ('route_monorail_rel_names', (select count (distinct name) from planet_osm_line where route = 'monorail' and name is not null and osm_id < 0));	
 
 insert into transit (query_name, value) values ('route_rail_rel_names', (select count (distinct name) from planet_osm_line where route = 'rail' and name is not null and osm_id < 0));
 	
@@ -169,11 +223,21 @@ insert into transit (query_name, value) values ('route_subway_rel_names', (selec
 
 insert into transit (query_name, value) values ('route_train_rel_names', (select count (distinct name) from planet_osm_line where route = 'train' and name is not null and osm_id < 0));
 
-insert into transit (query_name, value) values ('route_all_rel_names', (select count (distinct name) from planet_osm_line where route in ('light_rail', 'rail', 'railway', 'subway', 'train') and name is not null and osm_id < 0));
+insert into transit (query_name, value) values ('route_trolleybus_rel_names', (select count (distinct name) from planet_osm_line where route = 'trolleybus' and name is not null and osm_id < 0));	
 
---Calculate the length of light rails, rails, railways, subways and trains associated with the route key that also have the color tag for all relations
+insert into transit (query_name, value) values ('route_tram_rel_names', (select count (distinct name) from planet_osm_line where route = 'tram' and name is not null and osm_id < 0));	
+
+insert into transit (query_name, value) values ('route_all_rel_names', (select count (distinct name) from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and name is not null and osm_id < 0));
+
+--Calculate the length of buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key that also have the color tag for all relations
+
+insert into transit (query_name, value) values ('route_bus_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and (tags ?| array ['color', 'colour']) and osm_id < 0));
+
+insert into transit (query_name, value) values ('route_funicular_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and (tags ?| array ['color', 'colour']) and osm_id < 0));	
 
 insert into transit (query_name, value) values ('route_light_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and (tags ?| array ['color', 'colour']) and osm_id < 0));
+
+insert into transit (query_name, value) values ('route_monorail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and (tags ?| array ['color', 'colour']) and osm_id < 0));	
 
 insert into transit (query_name, value) values ('route_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and (tags ?| array ['color', 'colour']) and osm_id < 0));
 
@@ -183,11 +247,21 @@ insert into transit (query_name, value) values ('route_subway_color_rel_km', (se
 	
 insert into transit (query_name, value) values ('route_train_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and (tags ?| array ['color', 'colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('route_all_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('light_rail', 'rail', 'railway', 'subway', 'train') and (tags ?| array ['color', 'colour']) and osm_id < 0));
+insert into transit (query_name, value) values ('route_trolleybus_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and (tags ?| array ['color', 'colour']) and osm_id < 0));	
 
---Calculate the percentage of length that has the color tag for light rails, rails, railways, subways and trains associated with the route key for all relations
+insert into transit (query_name, value) values ('route_tram_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and (tags ?| array ['color', 'colour']) and osm_id < 0));	
+
+insert into transit (query_name, value) values ('route_all_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and (tags ?| array ['color', 'colour']) and osm_id < 0));
+
+--Calculate the percentage of length that has the color tag for buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all relations
+
+insert into transit (query_name, value) values ('route_bus_color_rel_km_pct', (((select value from transit where query_name = 'route_bus_color_rel_km')/(select value from transit where query_name = 'route_bus_rel_km')) *100));
+
+insert into transit (query_name, value) values ('route_funicular_color_rel_km_pct', (((select value from transit where query_name = 'route_funicular_color_rel_km')/(select value from transit where query_name = 'route_funicular_rel_km')) *100));	
 
 insert into transit (query_name, value) values ('route_light_rail_color_rel_km_pct', (((select value from transit where query_name = 'route_light_rail_color_rel_km')/(select value from transit where query_name = 'route_light_rail_rel_km')) *100));
+
+insert into transit (query_name, value) values ('route_monorail_color_rel_km_pct', (((select value from transit where query_name = 'route_monorail_color_rel_km')/(select value from transit where query_name = 'route_monorail_rel_km')) *100));	
 
 insert into transit (query_name, value) values ('route_rail_color_rel_km_pct', (((select value from transit where query_name = 'route_rail_color_rel_km')/(select value from transit where query_name = 'route_rail_rel_km')) *100));
 
@@ -196,6 +270,10 @@ insert into transit (query_name, value) values ('route_railway_color_rel_km_pct'
 insert into transit (query_name, value) values ('route_subway_color_rel_km_pct', (((select value from transit where query_name = 'route_subway_color_rel_km')/(select value from transit where query_name = 'route_subway_rel_km')) *100));
 	
 insert into transit (query_name, value) values ('route_train_color_rel_km_pct', (((select value from transit where query_name = 'route_train_color_rel_km')/(select value from transit where query_name = 'route_train_rel_km')) *100));	
+
+insert into transit (query_name, value) values ('route_trolleybus_color_rel_km_pct', (((select value from transit where query_name = 'route_trolleybus_color_rel_km')/(select value from transit where query_name = 'route_trolleybus_rel_km')) *100));	
+
+insert into transit (query_name, value) values ('route_tram_color_rel_km_pct', (((select value from transit where query_name = 'route_tram_color_rel_km')/(select value from transit where query_name = 'route_tram_rel_km')) *100));	
 
 insert into transit (query_name, value) values ('route_all_color_rel_km_pct', (((select value from transit where query_name = 'route_all_color_rel_km')/(select value from transit where query_name = 'route_all_rel_km')) *100));
 
