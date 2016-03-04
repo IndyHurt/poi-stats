@@ -1,5 +1,5 @@
 ﻿drop table if exists transit;
-create table transit (query_name text, value real);
+create table transit (query_name text, value real);	
 
 -- Investigating the Railway key	
 
