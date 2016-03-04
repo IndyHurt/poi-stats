@@ -224,6 +224,8 @@ insert into transit (query_name, value) values ('route_subway_color_way_km_pct',
 	
 insert into transit (query_name, value) values ('route_train_color_way_km_pct', (((select value from transit where query_name = 'route_train_color_way_km')/(select value from transit where query_name = 'route_train_way_km')) *100));	
 
+insert into transit (query_name, value) values ('route_tram_color_way_km_pct', (((select value from transit where query_name = 'route_tram_color_way_km')/(select value from transit where query_name = 'route_tram_way_km')) *100));
+
 insert into transit (query_name, value) values ('route_trolleybus_color_way_km_pct', (((select value from transit where query_name = 'route_trolleybus_color_way_km')/(select value from transit where query_name = 'route_trolleybus_way_km')) *100));	
 
 insert into transit (query_name, value) values ('route_all_color_way_km_pct', (((select value from transit where query_name = 'route_all_color_way_km')/(select value from transit where query_name = 'route_all_way_km')) *100));
