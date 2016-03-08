@@ -37,19 +37,19 @@ insert into transit (query_name, value) values ('railway_all_way_names', (select
 
 --Calculate the length of funiculars, light rails, monorails, rails, subways and trams associated with the railway key that also have the color tag for all ways
 
-insert into transit (query_name, value) values ('railway_funicular_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('railway_funicular_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('railway_light_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('railway_light_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('railway_monorail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('railway_monorail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('railway_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('railway_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('railway_subway_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('railway_subway_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('railway_tram_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('railway_tram_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('railway_all_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway in ('funicular', 'light_rail', 'monorail', 'rail', 'subway', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('railway_all_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where railway in ('funicular', 'light_rail', 'monorail', 'rail', 'subway', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
 --Calculate the percentage of length that has the color tag for funiculars, light rails, monorails, rails, subways and trams associated with the railway key for all ways
 
@@ -101,19 +101,19 @@ insert into transit (query_name, value) values ('railway_all_rel_names', (select
 
 --Calculate the length of funiculars, light rails, monorails, rails, subways and trams associated with the railway key that also have the color tag for all relations
 
-insert into transit (query_name, value) values ('railway_funicular_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('railway_funicular_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
-insert into transit (query_name, value) values ('railway_light_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('railway_light_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
-insert into transit (query_name, value) values ('railway_monorail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));	
+insert into transit (query_name, value) values ('railway_monorail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('railway_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('railway_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
-insert into transit (query_name, value) values ('railway_subway_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('railway_subway_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
-insert into transit (query_name, value) values ('railway_tram_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));	
+insert into transit (query_name, value) values ('railway_tram_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('railway_all_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway in ('funicular', 'light_rail', 'monorail', 'rail', 'subway', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('railway_all_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where railway in ('funicular', 'light_rail', 'monorail', 'rail', 'subway', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
 --Calculate the percentage of length that has the color tag for funiculars, light rails, monorails, rails, subways and trams associated with the railway key for all relations
 
@@ -184,27 +184,27 @@ insert into transit (query_name, value) values ('route_all_way_names', (select c
 
 --Calculate the length of buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key that also have the color tag for all ways
 
-insert into transit (query_name, value) values ('route_bus_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_bus_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_funicular_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));	
+insert into transit (query_name, value) values ('route_funicular_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));	
 
-insert into transit (query_name, value) values ('route_light_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_light_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_monorail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));	
+insert into transit (query_name, value) values ('route_monorail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));	
 
-insert into transit (query_name, value) values ('route_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_rail_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_railway_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'railway' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_railway_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'railway' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 	
-insert into transit (query_name, value) values ('route_subway_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_subway_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_train_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_train_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
-insert into transit (query_name, value) values ('route_trolleybus_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));	
+insert into transit (query_name, value) values ('route_trolleybus_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));	
 
-insert into transit (query_name, value) values ('route_tram_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));	
+insert into transit (query_name, value) values ('route_tram_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));	
 
-insert into transit (query_name, value) values ('route_all_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id > 0));
+insert into transit (query_name, value) values ('route_all_color_way_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id > 0));
 
 --Calculate the percentage of length that has the color tag for buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all ways
 
@@ -280,27 +280,27 @@ insert into transit (query_name, value) values ('route_all_rel_names', (select c
 
 --Calculate the length of buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key that also have the color tag for all relations
 
-insert into transit (query_name, value) values ('route_bus_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('route_bus_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bus' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
-insert into transit (query_name, value) values ('route_funicular_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));	
+insert into transit (query_name, value) values ('route_funicular_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'funicular' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('route_light_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('route_light_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'light_rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
-insert into transit (query_name, value) values ('route_monorail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));	
+insert into transit (query_name, value) values ('route_monorail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'monorail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('route_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('route_rail_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'rail' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
-insert into transit (query_name, value) values ('route_railway_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'railway' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('route_railway_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'railway' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 	
-insert into transit (query_name, value) values ('route_subway_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('route_subway_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'subway' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 	
-insert into transit (query_name, value) values ('route_train_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));	
+insert into transit (query_name, value) values ('route_train_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'train' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('route_trolleybus_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));	
+insert into transit (query_name, value) values ('route_trolleybus_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'trolleybus' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('route_tram_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));	
+insert into transit (query_name, value) values ('route_tram_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route = 'tram' and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));	
 
-insert into transit (query_name, value) values ('route_all_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color']) and osm_id < 0));
+insert into transit (query_name, value) values ('route_all_color_rel_km', (select sum(st_length(way))/1000 from planet_osm_line where route in ('bus', 'funicular', 'light_rail', 'monorail', 'rail', 'railway', 'subway', 'train', 'trolleybus', 'tram') and (tags ?| array ['color', 'colour', 'gtfs_route_color', 'gtfs_route_colour']) and osm_id < 0));
 
 --Calculate the percentage of length that has the color tag for buses, funiculars, light rails, monorails, rails, railways, subways, trains, trolleybuses, and trams associated with the route key for all relations
 
