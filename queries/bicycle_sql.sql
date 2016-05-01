@@ -2,10 +2,10 @@
 create table bicycle (query_name text, value real);
 
 -- what's the length of bike paths separate from the road?
-insert into bicycle (query_name, value) values ('separate_path', (select sum(st_length(way))/1000 from planet_osm_line where highway = 'cycleway' and osm_id > 0));
+insert into bicycle (query_name, value) values ('bike_separate_path', (select sum(st_length(way))/1000 from planet_osm_line where highway = 'cycleway' and osm_id > 0));
 
 -- what's the length of bike paths on the road?
-insert into bicycle (query_name, value) values ('road_path', (select sum(st_length(way))/1000 from planet_osm_line where tags ? 'cycleway' and highway is not null and osm_id > 0));
+insert into bicycle (query_name, value) values ('bike_road_path', (select sum(st_length(way))/1000 from planet_osm_line where tags ? 'cycleway' and highway is not null and osm_id > 0));
 
 -- what's the length of bike routes
 insert into bicycle (query_name, value) values ('bike_route', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bicycle' and osm_id < 0));
