@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Bike Shares and Rentals</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        	['Metro Extract', 'Bike Shares'],
+               ['Amsterdam', 45],
+               ['Barcelona', 230],
+               ['Berlin', 239],
+               ['Buenos Aires', 39],
+               ['Copenhagen', 21],
+               ['Minneapolis / St Paul', 248],
+               ['Montreal', 134],
+               ['Paris', 1274],
+               ['Portland', 5],
+               ['San Francisco', 52]
+            ]);
+
+        	var options = {
+	          chart: {
+	            title: 'Number of Bike Share and Rental Locations',
+	            subtitle: 'Present in OpenStreetMap Data',
+	          },
+	          bars: 'horizontal',
+	          colors: ['#6d9fa3'],
+	          legend: {position: 'none'}, 
+	        };
+
+        var chart = new google.charts.Bar(document.getElementById('bike_share'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="bike_share" style="width: 100%; height: 500px;"></div>
+  </body>
+</html>
