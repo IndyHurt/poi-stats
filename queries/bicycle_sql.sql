@@ -29,5 +29,3 @@ insert into bicycle (query_name, value) values ('bike_shop_points', (select coun
 -- what's the total count of bicycle related points of interest?
 insert into bicycle (query_name, value) values ('bike_pois', (select sum(value) from bicycle where query_name = 'bike_parking_polygons' or query_name = 'bike_parking_points' or query_name = 'bike_repair_polygons' or query_name = 'bike_repair_points' or query_name = 'bike_rental_polygons' or query_name = 'bike_rental_points' or query_name = 'bike_shop_polygons' or query_name = 'bike_shop_points'));
 
-select * from bicycle; 
-

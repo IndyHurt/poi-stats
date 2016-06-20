@@ -36,5 +36,3 @@ insert into new_hospital_features (query_name, value) values ('hospital_polys_in
 --percent increase = increase / previous total * 100
 
 insert into new_hospital_features (query_name, value) values ('hospital_poly_percent_increase', (((select value from new_hospital_features where query_name = 'hospital_polys_increase') / (select value from new_hospital_features where query_name = 'hospital_polys_pre_post')) * 100));
-
-select * from new_hospital_features
