@@ -10,9 +10,9 @@ insert into bicycle (query_name, value) values ('bike_lane', (select sum(st_leng
 -- what's the length of bike routes
 insert into bicycle (query_name, value) values ('bike_route', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bicycle' and osm_id < 0));
 
--- how many bicyle parking areas are there?
+-- how many bicycle parking areas are there?
 insert into bicycle (query_name, value) values ('bike_parking_polygons', (select count(*) from planet_osm_polygon where amenity = 'bicycle_parking' and osm_id > 0));
-insert into bicycle (query_name, value) values ('bike_parking_points', (select count(*) from planet_osm_point where amenity = 'bicyle_parking' and osm_id > 0));
+insert into bicycle (query_name, value) values ('bike_parking_points', (select count(*) from planet_osm_point where amenity = 'bicycle_parking' and osm_id > 0));
 
 -- how many bicycle repair stations are there?
 insert into bicycle (query_name, value) values ('bike_repair_polygons', (select count(*) from planet_osm_polygon where amenity = 'bicycle_repair_station' and osm_id > 0));
