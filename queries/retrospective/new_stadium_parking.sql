@@ -86,8 +86,3 @@ insert into stadium_eval (query_name, value) values ('stadium_with_nearby_parkin
 
 
 select * from stadium_eval;
-
-
-
-
-

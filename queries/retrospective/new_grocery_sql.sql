@@ -61,4 +61,4 @@ insert into new_grocery (query_name, value) values ('grocery_with_hours_pct', ((
 
 insert into new_grocery (query_name, value) values ('grocery_with_hours_pct_new', (((select value from new_grocery where query_name = 'grocery_with_hours_total_new')/(select value from new_grocery where query_name = 'grocery_total_new')) *100));
 
-select * from new_grocery
+select * from new_grocery;

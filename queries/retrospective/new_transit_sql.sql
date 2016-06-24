@@ -361,3 +361,5 @@ insert into transit (query_name, value) values ('route_subway_color_rel_km_pct_n
 insert into transit (query_name, value) values ('route_train_color_rel_km_pct_new', (((select value from transit where query_name = 'route_train_color_rel_km_new')/(select value from transit where query_name = 'route_train_rel_km_new')) *100));
 
 insert into transit (query_name, value) values ('route_tram_color_rel_km_pct_new', (((select value from transit where query_name = 'route_tram_color_rel_km_new')/(select value from transit where query_name = 'route_tram_rel_km_new')) *100));
+	
+select * from transit;	

@@ -146,3 +146,5 @@ VALUES      ('apartment_named_pct_new',
                  apartments 
                                                                       WHERE 
                      query_name = 'apartment_total_new') ) * 100 ));
+
+select * from new_airport_features;

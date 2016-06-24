@@ -65,4 +65,4 @@ insert into new_banks (query_name, value) values ('banks_with_hours_pct', (((sel
 
 insert into new_banks (query_name, value) values ('banks_with_hours_pct_new', (((select value from new_banks where query_name = 'banks_with_hours_total_new')/(select value from new_banks where query_name = 'banks_total_new')) *100));
 
-select * from new_banks
+select * from new_banks;

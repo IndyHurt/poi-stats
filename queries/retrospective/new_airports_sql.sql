@@ -36,3 +36,5 @@ insert into new_airport_features (query_name, value) values ('airport_polys_incr
 --percent increase = increase / previous total * 100
 
 insert into new_airport_features (query_name, value) values ('airport_poly_percent_increase', (((select value from new_airport_features where query_name = 'airport_polys_increase') / (select value from new_airport_features where query_name = 'airport_polys_pre_post')) * 100));
+	
+select * from new_airport_features;	
