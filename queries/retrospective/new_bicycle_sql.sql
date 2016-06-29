@@ -1,60 +1,473 @@
-﻿drop table if exists new_bicycle;
-create table new_bicycle (query_name text, value real);
+﻿DROP TABLE IF EXISTS new_bicycle;
+
+CREATE TABLE new_bicycle 
+             ( 
+                          query_name TEXT, 
+                          value REAL 
+             ); 
 
 -- what's the length of bike tracks which are paths separate from the road?
-insert into new_bicycle (query_name, value) values ('bike_track', (select sum(st_length(way))/1000 from planet_osm_line where (highway = 'cycleway' and osm_id > 0) or (highway is not null and tags @> '"cycleway"=>"track"' and osm_id > 0) or (highway is not null and bicycle = 'use_sidepath')));
+
+INSERT INTO new_bicycle
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_track', 
+                        ( 
+                               SELECT Sum(St_length(way))/1000 
+                               FROM   planet_osm_line 
+                               WHERE  ( 
+                                             highway = 'cycleway' 
+                                      AND    osm_id > 0) 
+                               OR     ( 
+                                             highway IS NOT NULL 
+                                      AND    tags @> '"cycleway"=>"track"' 
+                                      AND    osm_id > 0) 
+                               OR     ( 
+                                             highway IS NOT NULL 
+                                      AND    bicycle = 'use_sidepath')) 
+            ); 
 
 -- what's the length of bike tracks which are paths separate from the road and new or modified since the post?
-insert into new_bicycle (query_name, value) values ('bike_track_new', (select sum(st_length(way))/1000 from planet_osm_line where (highway = 'cycleway' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07') or (highway is not null and tags @> '"cycleway"=>"track"' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07') or (highway is not null and bicycle = 'use_sidepath' and osm_timestamp > '2016-05-19 17:57:00-07')));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_track_new', 
+                        ( 
+                               SELECT Sum(St_length(way))/1000 
+                               FROM   planet_osm_line 
+                               WHERE  ( 
+                                             highway = 'cycleway' 
+                                      AND    osm_id > 0 
+                                      AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+                               OR     ( 
+                                             highway IS NOT NULL 
+                                      AND    tags @> '"cycleway"=>"track"' 
+                                      AND    osm_id > 0 
+                                      AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+                               OR     ( 
+                                             highway IS NOT NULL 
+                                      AND    bicycle = 'use_sidepath' 
+                                      AND    osm_timestamp > '2016-05-19 17:57:00-07')) 
+            ); 
 
 -- what's the length of bike lanes which are paths on the road?
-insert into new_bicycle (query_name, value) values ('bike_lane', (select sum(st_length(way))/1000 from planet_osm_line where tags ? 'cycleway' and highway is not null and osm_id > 0));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_lane', 
+                        ( 
+                               SELECT Sum(St_length(way))/1000 
+                               FROM   planet_osm_line 
+                               WHERE  tags ? 'cycleway' 
+                               AND    highway IS NOT NULL 
+                               AND    osm_id > 0) 
+            ); 
 
 -- what's the length of bike lanes which are paths on the road and new or modified since the post?
-insert into new_bicycle (query_name, value) values ('bike_lane_new', (select sum(st_length(way))/1000 from planet_osm_line where tags ? 'cycleway' and highway is not null and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_lane_new', 
+                        ( 
+                               SELECT Sum(St_length(way))/1000 
+                               FROM   planet_osm_line 
+                               WHERE  tags ? 'cycleway' 
+                               AND    highway IS NOT NULL 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            ); 
 
 -- what's the length of bike routes
-insert into new_bicycle (query_name, value) values ('bike_route', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bicycle' and osm_id < 0));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_route', 
+                        ( 
+                               SELECT Sum(St_length(way))/1000 
+                               FROM   planet_osm_line 
+                               WHERE  route = 'bicycle' 
+                               AND    osm_id < 0) 
+            ); 
 
 -- what's the length of bike routes and new or modified since the post?
-insert into new_bicycle (query_name, value) values ('bike_route_new', (select sum(st_length(way))/1000 from planet_osm_line where route = 'bicycle' and osm_id < 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_route_new', 
+                        ( 
+                               SELECT Sum(St_length(way))/1000 
+                               FROM   planet_osm_line 
+                               WHERE  route = 'bicycle' 
+                               AND    osm_id < 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            ); 
 
 -- how many bicycle parking areas are there?
-insert into new_bicycle (query_name, value) values ('bike_parking_polygons', (select count(*) from planet_osm_polygon where amenity = 'bicycle_parking' and osm_id > 0));
-insert into new_bicycle (query_name, value) values ('bike_parking_points', (select count(*) from planet_osm_point where amenity = 'bicycle_parking' and osm_id > 0));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_parking_polygons', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  amenity = 'bicycle_parking' 
+                               AND    osm_id > 0) 
+            );
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_parking_points', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  amenity = 'bicycle_parking' 
+                               AND    osm_id > 0) 
+            ); 
 
 -- how many bicycle parking areas are there and new or modified since the post?
-insert into new_bicycle (query_name, value) values ('bike_parking_polygons_new', (select count(*) from planet_osm_polygon where amenity = 'bicycle_parking' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
-insert into new_bicycle (query_name, value) values ('bike_parking_points_new', (select count(*) from planet_osm_point where amenity = 'bicycle_parking' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_parking_polygons_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  amenity = 'bicycle_parking' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            );
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_parking_points_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  amenity = 'bicycle_parking' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            ); 
 
 -- how many bicycle repair stations are there?
-insert into new_bicycle (query_name, value) values ('bike_repair_polygons', (select count(*) from planet_osm_polygon where amenity = 'bicycle_repair_station' and osm_id > 0));
-insert into new_bicycle (query_name, value) values ('bike_repair_points', (select count(*) from planet_osm_point where amenity = 'bicycle_repair_station' and osm_id > 0));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_repair_polygons', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  amenity = 'bicycle_repair_station' 
+                               AND    osm_id > 0) 
+            );
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_repair_points', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  amenity = 'bicycle_repair_station' 
+                               AND    osm_id > 0) 
+            ); 
 
 -- how many bicycle repair stations are there and new or modified since the post?
-insert into new_bicycle (query_name, value) values ('bike_repair_polygons_new', (select count(*) from planet_osm_polygon where amenity = 'bicycle_repair_station' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
-insert into new_bicycle (query_name, value) values ('bike_repair_points_new', (select count(*) from planet_osm_point where amenity = 'bicycle_repair_station' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
+
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_repair_polygons_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  amenity = 'bicycle_repair_station' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            );
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_repair_points_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  amenity = 'bicycle_repair_station' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            ); 
 
 -- how many bicycle rental locations are there?
-insert into new_bicycle (query_name, value) values ('bike_rental_polygons', (select count(*) from planet_osm_polygon where amenity = 'bicycle_rental' and osm_id > 0));
-insert into new_bicycle (query_name, value) values ('bike_rental_points', (select count(*) from planet_osm_point where amenity = 'bicycle_rental' and osm_id > 0));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_rental_polygons', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  amenity = 'bicycle_rental' 
+                               AND    osm_id > 0) 
+            );
+
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_rental_points', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  amenity = 'bicycle_rental' 
+                               AND    osm_id > 0) 
+            ); 
 
 -- how many bicycle rental locations are there and new or modified since the post?
-insert into new_bicycle (query_name, value) values ('bike_rental_polygons_new', (select count(*) from planet_osm_polygon where amenity = 'bicycle_rental' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
-insert into new_bicycle (query_name, value) values ('bike_rental_points_new', (select count(*) from planet_osm_point where amenity = 'bicycle_rental' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_rental_polygons_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  amenity = 'bicycle_rental' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            );
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_rental_points_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  amenity = 'bicycle_rental' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            ); 
 
 -- how many bicycle shops are there?
-insert into new_bicycle (query_name, value) values ('bike_shop_polygons', (select count(*) from planet_osm_polygon where shop = 'bicycle' and osm_id > 0));
-insert into new_bicycle (query_name, value) values ('bike_shop_points', (select count(*) from planet_osm_point where shop = 'bicycle' and osm_id > 0));
+
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_shop_polygons', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  shop = 'bicycle' 
+                               AND    osm_id > 0) 
+            );
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_shop_points', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  shop = 'bicycle' 
+                               AND    osm_id > 0) 
+            ); 
 
 -- how many bicycle shops are there?
-insert into new_bicycle (query_name, value) values ('bike_shop_polygons_new', (select count(*) from planet_osm_polygon where shop = 'bicycle' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
-insert into new_bicycle (query_name, value) values ('bike_shop_points_new', (select count(*) from planet_osm_point where shop = 'bicycle' and osm_id > 0 and osm_timestamp > '2016-05-19 17:57:00-07'));
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_shop_polygons_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_polygon 
+                               WHERE  shop = 'bicycle' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            );
+
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_shop_points_new', 
+                        ( 
+                               SELECT Count(*) 
+                               FROM   planet_osm_point 
+                               WHERE  shop = 'bicycle' 
+                               AND    osm_id > 0 
+                               AND    osm_timestamp > '2016-05-19 17:57:00-07') 
+            ); 
 
 -- what's the total count of bicycle related points of interest?
-insert into new_bicycle (query_name, value) values ('bike_pois', (select sum(value) from new_bicycle where query_name = 'bike_parking_polygons' or query_name = 'bike_parking_points' or query_name = 'bike_repair_polygons' or query_name = 'bike_repair_points' or query_name = 'bike_rental_polygons' or query_name = 'bike_rental_points' or query_name = 'bike_shop_polygons' or query_name = 'bike_shop_points'));
+
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_pois', 
+                        ( 
+                               SELECT Sum(value) 
+                               FROM   new_bicycle 
+                               WHERE  query_name = 'bike_parking_polygons' 
+                               OR     query_name = 'bike_parking_points' 
+                               OR     query_name = 'bike_repair_polygons' 
+                               OR     query_name = 'bike_repair_points' 
+                               OR     query_name = 'bike_rental_polygons' 
+                               OR     query_name = 'bike_rental_points' 
+                               OR     query_name = 'bike_shop_polygons' 
+                               OR     query_name = 'bike_shop_points') 
+            ); 
 
 -- what's the total count of bicycle related points of interest that are new or modified since the post?
-insert into new_bicycle (query_name, value) values ('bike_pois_new', (select sum(value) from new_bicycle where query_name = 'bike_parking_polygons_new' or query_name = 'bike_parking_points_new' or query_name = 'bike_repair_polygons_new' or query_name = 'bike_repair_points_new' or query_name = 'bike_rental_polygons_new' or query_name = 'bike_rental_points_new' or query_name = 'bike_shop_polygons_new' or query_name = 'bike_shop_points_new'));
 
-select * from new_bicycle;
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_pois_new', 
+                        ( 
+                               SELECT Sum(value) 
+                               FROM   new_bicycle 
+                               WHERE  query_name = 'bike_parking_polygons_new' 
+                               OR     query_name = 'bike_parking_points_new' 
+                               OR     query_name = 'bike_repair_polygons_new' 
+                               OR     query_name = 'bike_repair_points_new' 
+                               OR     query_name = 'bike_rental_polygons_new' 
+                               OR     query_name = 'bike_rental_points_new' 
+                               OR     query_name = 'bike_shop_polygons_new' 
+                               OR     query_name = 'bike_shop_points_new') 
+            ); 
+
+-- what percent of the bicycle related points of interest are new or modified since the post?
+
+INSERT INTO new_bicycle 
+            ( 
+                        query_name, 
+                        value 
+            ) 
+            VALUES 
+            ( 
+                        'bike_pios_new_pct', 
+                        ( ( 
+                        ( 
+                               SELECT value 
+                               FROM   new_bicycle 
+                               WHERE  query_name = 'bike_pois_new') / 
+                        ( 
+                               SELECT value 
+                               FROM   new_bicycle 
+                               WHERE  query_name = 'bike_pois') ) * 100 ) 
+            );
+
+
+SELECT * 
+FROM   new_bicycle;

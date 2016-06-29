@@ -37,6 +37,8 @@ insert into new_fitness (query_name, value) values ('fitness_total', (select sum
 
 insert into new_fitness (query_name, value) values ('fitness_total_new', (select sum(value) from new_fitness where query_name = 'fitness_points_new' or query_name = 'fitness_polygons_new'));
 
+insert into new_fitness (query_name, value) values ('fitness_total_new_pct', (((select value from new_fitness where query_name = 'fitness_total_new')/(select value from new_fitness where query_name = 'fitness_total')) *100));
+
 insert into new_fitness (query_name, value) values ('fitness_with_address_total', (select sum(value) from new_fitness where query_name = 'fitness_points_with_housenumber' or query_name = 'fitness_polygons_with_housenumber'));
 
 insert into new_fitness (query_name, value) values ('fitness_with_address_total_new', (select sum(value) from new_fitness where query_name = 'fitness_points_with_housenumber_new' or query_name = 'fitness_polygons_with_housenumber_new'));

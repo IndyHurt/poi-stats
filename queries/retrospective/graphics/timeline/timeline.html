@@ -1,0 +1,85 @@
+<html>
+<head>
+    <title>Targeted Editing Timeline</title>
+
+    <style type="text/css">
+        body {font: 10pt arial;}
+    </style>
+
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="..timeline/timeline.js"></script>
+    <link rel="stylesheet" type="text/css" href="..timeline/timeline.css">
+
+    <script type="text/javascript">
+        var timeline;
+
+        google.load("visualization", "1");
+
+        // Set callback to run when API is loaded
+        google.setOnLoadCallback(drawVisualization);
+
+        // Called when the Visualization API is loaded.
+        function drawVisualization() {
+            // Create and populate a data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('datetime', 'start');
+            data.addColumn('datetime', 'end');
+            data.addColumn('string', 'content');
+
+            data.addRows([
+                [new Date(2015, 12, 2), new Date(2016, 6, 25), 'Street Names', +
+                        '<img src="img/transit.png" style="width:40px; height:40px;">'],
+                [new Date(2015, 12, 7),  new Date(2016, 6, 25), 'Hospital Polygons', +
+                        '<img src="img/hospital.png" style="width:40px; height:40px;">'],
+                [new Date(2015, 12, 10),  new Date(2016, 6, 25), 'School Polygons', +
+                        '<img src="img/school.png" style="width:40px; height:40px;">'],
+                [new Date(2015, 12, 14),  new Date(2016, 6, 25), 'Airport Polygons', +
+                        '<img src="img/airport.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 1, 8),  new Date(2016, 6, 25), 'Building Names', +
+                        '<img src="img/building.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 1, 19),  new Date(2016, 6, 25), 'Grocery Stores', +
+                        '<img src="img/grocery.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 2, 4),  new Date(2016, 6, 25), 'Stadium Parking', +
+                        '<img src="img/stadium.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 2, 11),  new Date(2016, 6, 25), 'Fitness Centres', +
+                        '<img src="img/fitness.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 3, 10),  new Date(2016, 6, 25), 'Lodging', +
+                        '<img src="img/lodging.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 3, 18),  new Date(2016, 6, 25), 'Transit Colours', +
+                        '<img src="img/transit.png" style="width:40px; height:40px;">'],                        
+                [new Date(2016, 3, 31),  new Date(2016, 6, 25), 'Campus Mapping', +
+                        '<img src="img/campus.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 4, 12),  new Date(2016, 6, 25), 'Banks', +
+                        '<img src="img/bank.png" style="width:40px; height:40px;">'],
+                [new Date(2016, 5, 19),  new Date(2016, 6, 25), 'Bike Infrustructure', +
+                        '<img src="img/bike.png" style="width:40px; height:40px;">']                               
+                
+            ]);
+
+            // specify options
+            var options = {
+                "width":  "100%",
+                "height": "400px",
+                "style": "box"
+            };
+
+            // Instantiate our timeline object.
+            timeline = new links.Timeline(document.getElementById('mytimeline'), options);
+
+            // Draw our timeline with the created data and options
+            timeline.draw(data);
+        }
+    </script>
+</head>
+
+<body>
+<div id="mytimeline"></div>
+
+<!-- Information about where the used icons come from -->
+<p style="color:gray; font-size:10px; font-style:italic;">
+    Icons by <a href="http://dryicons.com" target="_blank" title="Aesthetica 2 Icons by DryIcons" style="color:gray;" >DryIcons</a>
+    and <a href="http://www.tpdkdesign.net" target="_blank" title="Refresh Cl Icons by TpdkDesign.net" style="color:gray;" >TpdkDesign.net</a>
+</p>
+
+</body>
+</html>

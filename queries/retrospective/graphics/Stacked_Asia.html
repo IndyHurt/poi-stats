@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Stacked Bar Chart</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="width: 75%">
+        <canvas id="canvas"></canvas>
+    </div>
+    
+    <script>
+        var randomScalingFactor = function() {
+            return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+        };
+        var randomColorFactor = function() {
+            return Math.round(Math.random() * 255);
+        };
+        var barChartData = {
+            labels: ["Beijing", "Bengaluru", "Hong Kong", "Moscow", "Mumbai", "New Delhi", "Seoul", "Singapore", "Tokyo"],
+            datasets: [{
+                label: 'Airport Polygons',
+                backgroundColor: "rgba(141,211,199,0.5)",
+                data: [0,1,3,5,0,1,5,2,5]
+            }, {
+                label: 'Apartments - Named',
+                backgroundColor: "rgba(255,255,179,0.5)",
+                data: [22,34,147,59,79,2,1696,188,588]
+            }, {
+                label: 'ATMs',
+                backgroundColor: "rgba(190,186,218,0.5)",
+                data: [10,50,12,104,13,13,16,26,57]
+            }, {
+                label: 'Banks',
+                backgroundColor: "rgba(251,128,114,0.5)",
+                data: [21,47,64,212,11,18,25,16,204]
+            }, {
+                label: 'Bike POIs',
+                backgroundColor: "rgba(128,177,211,0.5)",
+                data: [0,0,1,157,0,1,1,2,152]
+            }, {
+                label: 'Fitness',
+                backgroundColor: "rgba(253,180,98,0.5)",
+                data: [1,2,2,33,0,2,2,0,10]  
+            }, {
+                label: 'Groceries',
+                backgroundColor: "rgba(179,222,105,0.5)",
+                data: [66,86,196,2078,16,9,127,66,2422]
+            }, {
+                label: 'Hospital Polygons',
+                backgroundColor: "rgba(252,205,229,0.5)",
+                data: [11,28,58,70,6,13,20,5,95]
+            }, {
+                label: 'Lodging',
+                backgroundColor: "rgba(217,217,217,0.5)",
+                data: [67,41,95,110,16,43,53,57,246]
+            }, {
+                label: 'School Polygons',
+                backgroundColor: "rgba(188,128,189,0.5)",
+                data: [104,141,271,1279,18,52,534,72,920]  
+            }, {
+                label: 'Stadium Polygons',
+                backgroundColor: "rgba(204,235,197,0.5)",
+                data: [4,0,21,19,3,3,9,4,21]            
+            }]
+        };
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    title:{
+                        display:true,
+                        text:"New or Modified Since Targeted Editing Blog Post"
+                    },
+                    tooltips: {
+                        mode: 'label'
+                    },
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            stacked: true,
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                }
+            });
+        };
+        $('#randomizeData').click(function() {
+            $.each(barChartData.datasets, function(i, dataset) {
+                dataset.backgroundColor = 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
+                dataset.data = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()];
+            });
+            window.myBar.update();
+        });
+    </script>
+</body>
+
+</html>

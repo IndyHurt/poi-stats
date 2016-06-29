@@ -106,6 +106,19 @@ VALUES      ('apartment_total_new',
 INSERT INTO apartments 
             (query_name, 
              value) 
+VALUES      ('apartment_total_new_pct', 
+             ( ( (SELECT value 
+                  FROM   apartments 
+                  WHERE  query_name = 'apartment_total_new') / (SELECT 
+                 value 
+                                                                      FROM 
+                 apartments 
+                                                                      WHERE 
+                     query_name = 'apartment_total') ) * 100 ));                                    
+
+INSERT INTO apartments 
+            (query_name, 
+             value) 
 VALUES      ('apartment_points_named_new', 
              (SELECT Count(*) 
               FROM   planet_osm_point 
@@ -147,4 +160,4 @@ VALUES      ('apartment_named_pct_new',
                                                                       WHERE 
                      query_name = 'apartment_total_new') ) * 100 ));
 
-select * from new_airport_features;
+select * from apartments;

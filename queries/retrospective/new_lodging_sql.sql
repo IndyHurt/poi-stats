@@ -37,6 +37,8 @@ insert into new_lodging (query_name, value) values ('lodging_total', (select sum
 
 insert into new_lodging (query_name, value) values ('lodging_total_new', (select sum(value) from new_lodging where query_name = 'lodging_points_new' or query_name = 'lodging_polygons_new'));
 
+insert into new_lodging (query_name, value) values ('lodging_total_new_pct', (((select value from new_lodging where query_name = 'lodging_total_new')/(select value from new_lodging where query_name = 'lodging_total')) *100));
+
 insert into new_lodging (query_name, value) values ('lodging_with_address_total', (select sum(value) from new_lodging where query_name = 'lodging_points_with_housenumber' or query_name = 'lodging_polygons_with_housenumber'));
 
 insert into new_lodging (query_name, value) values ('lodging_with_address_total_new', (select sum(value) from new_lodging where query_name = 'lodging_points_with_housenumber_new' or query_name = 'lodging_polygons_with_housenumber_new'));
