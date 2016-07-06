@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Targeted Editing Posts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+      <!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Targeted Editing Posts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    
+
+
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+
+
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawVisualizationMrs);
+
+      function drawVisualizationMrs() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+         ['Post', 'Total Page Views', 'Tiles Served per Day Since Posted','Average Time on Page'],
+         ['Street Names',  662,684,4.47],
+         ['Hospital Polygons',  220,125,4.75],
+         ['School Polygons',  460,133,1.38],
+         ['Airport Polygons',  154,72,1.23],
+         ['Building Names',  302,13,2.16],
+         ['Groceries',  180,6,1.44],
+         ['Stadium Parking',  79,31,2.30],
+         ['Fitness Centres',  235,141,5.06],
+         ['Lodging',  198,456,1.59],
+         ['Transit Colours', 675,1591,4.05],
+         ['Campus Mapping', 286,133,2.01], 
+         ['Banks', 169,73,1.46],
+         ['Cycleways', 696,509,4.13]
+      ]);
+
+      var options = {
+          title : 'Targeted Editing Post Stats',
+          vAxes: {
+          0: { viewWindow: { min: 0}, title: 'Tiles Served and Page Views'}, 
+          1: { viewWindow: { min: 0}, title: 'Average Time on Page (minutes)'}
+        },
+          seriesType: 'bars',
+          isStacked: 'true',
+          colors: ['#C0D8E9', '#FEDAB1', '#191919'], 
+          series: {
+           2: { targetAxisIndex: 1, type: 'line', curveType: 'function', lineWidth: 3, lineDashStyle: [2, 1, 2]}},
+          legend: { position: 'bottom', textStyle: {fontSize: 13}}
+        };
+    var formatter1 = new google.visualization.NumberFormat({pattern:'###,###'});
+    formatter1.format(data, 1);
+    var formatter2 = new google.visualization.NumberFormat({pattern:'###,###'});
+    formatter2.format(data, 2);
+    var formatter3 = new google.visualization.NumberFormat({pattern:'###,###'});
+    formatter3.format(data, 3);
+    
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_divmrs'));
+    chart.draw(data, options);
+  }
+    </script>
+
+    
+
+
+
+    
+
+  </head>
+  <body>
+    
+
+<div id="chart_divmrs" style="width: 1000px; height: 500px;"></div>
+
+</body>
+  </head>
+ </html>

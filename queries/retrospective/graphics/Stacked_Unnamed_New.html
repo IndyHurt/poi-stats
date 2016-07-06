@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Stacked Bar Chart</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="width: 75%">
+        <canvas id="canvas"></canvas>
+    </div>
+    
+    <script>
+        var randomScalingFactor = function() {
+            return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+        };
+        var randomColorFactor = function() {
+            return Math.round(Math.random() * 255);
+        };
+        var barChartData = {
+            labels: ["Atlanta", "Boston", "Chicago", "DC", "Detroit", "Houston", "Indianapolis", "Jacksonville", "Los Angeles", "Mexico City", "Montreal", "New Orleans", "New York City", "Phoenix", "Portland OR", "San Diego", "San Francisco", "Tampa", "Tucson", "Vancouver"],
+            datasets: [{
+                label: 'Airport Polygons',
+                backgroundColor: "rgba(141,211,199,0.5)",
+                data: [1,0,3,9,8,5,14,1,16,1,5,0,8,3,7,3,3,2,2,0]
+            }, {
+                label: 'Apartments - Named',
+                backgroundColor: "rgba(255,255,179,0.5)",
+                data: [2,8,20,54,7,19,0,1,146,53,14,1,56,6,87,50,22,2,3,26]
+            }, {
+                label: 'ATMs',
+                backgroundColor: "rgba(190,186,218,0.5)",
+                data: [9,0,20,10,1,1,0,0,15,6,4,0,7,10,26,0,7,0,0,1]
+            }, {
+                label: 'Banks',
+                backgroundColor: "rgba(251,128,114,0.5)",
+                data: [25,7,45,40,27,10,1,3,42,50,39,1,17,33,77,2,20,6,1,6]
+            }, {
+                label: 'Bike POIs',
+                backgroundColor: "rgba(128,177,211,0.5)",
+                data: [17,13,13,18,5,2,0,0,43,5,8,0,2,5,353,3,9,0,0,31]
+            }, {
+                label: 'Fitness',
+                backgroundColor: "rgba(253,180,98,0.5)",
+                data: [2,0,1,6,0,1,0,1,6,3,2,0,9,2,3,0,10,2,1,0]  
+            }, {
+                label: 'Groceries',
+                backgroundColor: "rgba(179,222,105,0.5)",
+                data: [87,20,97,132,56,51,5,11,258,180,77,2,105,164,225,18,160,9,19,32]
+            }, {
+                label: 'Hospital Polygons',
+                backgroundColor: "rgba(252,205,229,0.5)",
+                data: [1,1,15,13,13,10,3,0,42,30,27,0,47,37,9,7,13,2,4,2]
+            }, {
+                label: 'Lodging',
+                backgroundColor: "rgba(217,217,217,0.5)",
+                data: [113,43,154,50,38,158,102,72,1129,46,28,108,60,132,49,126,67,67,57,12]
+            }, {
+                label: 'School Polygons',
+                backgroundColor: "rgba(188,128,189,0.5)",
+                data: [40,92,143,136,250,110,6,17,436,157,221,21,197,179,159,12,151,57,22,22]  
+            }, {
+                label: 'Stadium Polygons',
+                backgroundColor: "rgba(204,235,197,0.5)",
+                data: [0,2,2,1,5,1,0,1,9,4,2,0,6,2,5,0,4,0,0,5]            
+            }]
+        };
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    title:{
+                        display:true,
+                        text:"New or Modified Since Targeted Editing Blog Post"
+                    },
+                    tooltips: {
+                        mode: 'label'
+                    },
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            stacked: true,
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    }
+                }
+            });
+        };
+        $('#randomizeData').click(function() {
+            $.each(barChartData.datasets, function(i, dataset) {
+                dataset.backgroundColor = 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
+                dataset.data = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()];
+            });
+            window.myBar.update();
+        });
+    </script>
+</body>
+
+</html>
