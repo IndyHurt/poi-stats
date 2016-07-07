@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Stacked Bar Chart</title>
+    <title>North America Unnamed Roads</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
     <style>
@@ -27,51 +27,27 @@
             return Math.round(Math.random() * 255);
         };
         var barChartData = {
-            labels: ["Atlanta", "Boston", "Chicago", "DC", "Detroit", "Houston", "Indianapolis", "Jacksonville", "Los Angeles", "Mexico City", "Montreal", "New Orleans", "New York City", "Phoenix", "Portland OR", "San Diego", "San Francisco", "Tampa", "Tucson", "Vancouver"],
+            labels: ["Atlanta", "Boston", "Chicago", "DC", "Detroit", "Houston", "Indianapolis", "Jacksonville", "Los Angeles", "Mexico City", "Miami", "Montreal", "New Orleans", "New York City", "Phoenix", "Portland OR", "San Diego", "San Francisco", "Tampa", "Tucson", "Vancouver"],
             datasets: [{
-                label: 'Airport Polygons',
+                label: 'Unnamed Motorway',
                 backgroundColor: "rgba(141,211,199,0.5)",
-                data: [1,0,3,9,8,5,14,1,16,1,5,0,8,3,7,3,3,2,2,0]
+                data: [0.13,0.26,0.22,0.30,0.19,0.06,0.43,0.47,0.03,1.19,,0.20,0.14,,0.124798,0.01,,0.06,0.01,,,]
             }, {
-                label: 'Apartments - Named',
+                label: 'Unnamed Primary',
                 backgroundColor: "rgba(255,255,179,0.5)",
-                data: [2,8,20,54,7,19,0,1,146,53,14,1,56,6,87,50,22,2,3,26]
+                data: [0.07,0.38,0.07,0.36,0.03,1.15,0.05,0.24,0.14,15.80,0.09,0.19,0.13,0.03,0.28,0.32,,0.08,0.07,1.21,,0.18]
             }, {
-                label: 'ATMs',
+                label: 'Unnamed Secondary',
                 backgroundColor: "rgba(190,186,218,0.5)",
-                data: [9,0,20,10,1,1,0,0,15,6,4,0,7,10,26,0,7,0,0,1]
+                data: [0.53,1.19,0.14,0.13,0.13,0.70,0.46,0.24,0.17,26.66,0.24,0.10,0.71,0.29,0.80,0.40,0.10,0.21,0.27,0.16,0.02,0.54]
             }, {
-                label: 'Banks',
+                label: 'Unnamed Tertiary',
                 backgroundColor: "rgba(251,128,114,0.5)",
-                data: [25,7,45,40,27,10,1,3,42,50,39,1,17,33,77,2,20,6,1,6]
+                data: [1.30,0.92,0.43,0.60,0.29,2.61,0.59,0.74,0.80,38.67,0.65,0.47,9.50,1.67,1.21,1.85,0.15,0.19,0.35,0.36,2.22,0.14]
             }, {
-                label: 'Bike POIs',
+                label: 'Unnamed Residential',
                 backgroundColor: "rgba(128,177,211,0.5)",
-                data: [17,13,13,18,5,2,0,0,43,5,8,0,2,5,353,3,9,0,0,31]
-            }, {
-                label: 'Fitness',
-                backgroundColor: "rgba(253,180,98,0.5)",
-                data: [2,0,1,6,0,1,0,1,6,3,2,0,9,2,3,0,10,2,1,0]  
-            }, {
-                label: 'Groceries',
-                backgroundColor: "rgba(179,222,105,0.5)",
-                data: [87,20,97,132,56,51,5,11,258,180,77,2,105,164,225,18,160,9,19,32]
-            }, {
-                label: 'Hospital Polygons',
-                backgroundColor: "rgba(252,205,229,0.5)",
-                data: [1,1,15,13,13,10,3,0,42,30,27,0,47,37,9,7,13,2,4,2]
-            }, {
-                label: 'Lodging',
-                backgroundColor: "rgba(217,217,217,0.5)",
-                data: [113,43,154,50,38,158,102,72,1129,46,28,108,60,132,49,126,67,67,57,12]
-            }, {
-                label: 'School Polygons',
-                backgroundColor: "rgba(188,128,189,0.5)",
-                data: [40,92,143,136,250,110,6,17,436,157,221,21,197,179,159,12,151,57,22,22]  
-            }, {
-                label: 'Stadium Polygons',
-                backgroundColor: "rgba(204,235,197,0.5)",
-                data: [0,2,2,1,5,1,0,1,9,4,2,0,6,2,5,0,4,0,0,5]            
+                data: [11.86,6.16,3.12,8.19,3.69,19.76,9.25,5.50,6.76,57.05,4.55,8.21,3.93,24.67,2.17,9.59,6.95,2.72,2.09,5.14,13.82,0.54]            
             }]
         };
         window.onload = function() {
@@ -82,7 +58,7 @@
                 options: {
                     title:{
                         display:true,
-                        text:"New or Modified Since Targeted Editing Blog Post"
+                        text:"Percent Unnamed by Road Type - North America"
                     },
                     tooltips: {
                         mode: 'label'
