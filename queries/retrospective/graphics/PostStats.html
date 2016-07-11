@@ -35,19 +35,19 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
          ['Post', 'Total Page Views', 'Tiles Served per Day Since Posted','Average Time on Page'],
-         ['Street Names',  662,684,4.47],
-         ['Hospital Polygons',  220,125,4.75],
-         ['School Polygons',  460,133,1.83],
-         ['Airport Polygons',  154,72,1.38],
-         ['Building Names',  302,13,2.26],
-         ['Groceries',  180,6,1.73],
-         ['Stadium Parking',  79,31,2.5],
-         ['Fitness Centres',  235,141,5.1],
-         ['Lodging',  198,456,1.98],
-         ['Transit Colours', 675,1591,4.8],
-         ['Campus Mapping', 286,285,2.2], 
-         ['Banks', 169,73,1.77],
-         ['Cycleways', 696,509,4.22]
+          ['Street Names',662,669,4.46],
+          ['Hospital Polygons',220,122,4.75],
+          ['School Polygons',460,130,1.84],
+          ['Airport Polygons',154,70,1.39],
+          ['Building Names',302,12,2.28],
+          ['Groceries',180,6,1.74],
+          ['Stadium Parking',92,30,2.16],
+          ['Fitness Centres',235,136,5.11],
+          ['Lodging',198,482,1.41],
+          ['Transit Colours',675,1523,3.91],
+          ['Campus Mapping',286,271,2.03],
+          ['Banks',169,71,1.77],
+          ['Cycleways',696,467,4.21]
       ]);
 
       var options = {
@@ -67,7 +67,7 @@
     formatter1.format(data, 1);
     var formatter2 = new google.visualization.NumberFormat({pattern:'###,###'});
     formatter2.format(data, 2);
-    var formatter3 = new google.visualization.NumberFormat({pattern:'###,###'});
+    var formatter3 = new google.visualization.NumberFormat({pattern:'###.##'});
     formatter3.format(data, 3);
     
     var chart = new google.visualization.ComboChart(document.getElementById('chart_divmrs'));
