@@ -1,27 +1,32 @@
 ﻿-- Create a table of stadium polygons that are larger than 2000 square meters
 drop table if exists stadium_polygons;
 create table stadium_polygons as select osm_id, name, building, landuse, leisure, sport, tags, way from planet_osm_polygon where (osm_id > 0 and way_area > 2000) and (leisure = 'stadium' or building = 'stadium');
+select * from stadium_polygons;
 
 -- Create a table of stadium polygons that are larger than 2000 square meters new or modified since post
 drop table if exists stadium_polygons_new;
 create table stadium_polygons_new as select osm_id, name, building, landuse, leisure, sport, tags, way from planet_osm_polygon where (osm_id > 0 and way_area > 2000) and (leisure = 'stadium' or building = 'stadium') and osm_timestamp > '2016-02-04 14:00:00-08';
+select * from stadium_polygons_new;
 
 -- Create a table of parking polygons 
 drop table if exists parking_polygons;
 create table parking_polygons as select osm_id, name, landuse, amenity, tags, way from planet_osm_polygon where osm_id > 0 and amenity = 'parking';
+select * from parking_polygons;
 
 -- Create a table of parking polygons new or modified since post
 drop table if exists parking_polygons_new;
 create table parking_polygons_new as select osm_id, name, landuse, amenity, tags, way from planet_osm_polygon where osm_id > 0 and amenity = 'parking' and osm_timestamp > '2016-02-04 14:00:00-08';
-
+select * from parking_polygons_new;
 
 -- Create a table of parking aisles
 drop table if exists parking_aisles;
 create table parking_aisles as select osm_id, name, amenity, highway, service, tags, way from planet_osm_line where osm_id > 0 and service = 'parking_aisle';
+select * from parking_aisles;
 
 -- Create a table of parking aisles new or modified since post
 drop table if exists parking_aisles_new;
 create table parking_aisles_new as select osm_id, name, amenity, highway, service, tags, way from planet_osm_line where osm_id > 0 and service = 'parking_aisle' and osm_timestamp > '2016-02-04 14:00:00-08';
+select * from parking_aisles_new;
 
 -- Create indices to speed up queries
 analyze parking_polygons;
@@ -45,6 +50,7 @@ SELECT stadium_polygons.name as stadium_name, parking_polygons.name as parking_n
  FROM stadium_polygons LEFT JOIN parking_polygons 
    ON ST_DWithin(stadium_polygons.way, parking_polygons.way, 100)
    WHERE parking_polygons.osm_id IS NULL;
+   select * from stadiums_without_nearby_parking;
 
 -- Create a table of stadiums that do not have any parking polygons within 100 meters (about 330 ft) considering new or modified since post
 drop table if exists stadiums_without_nearby_parking_new;
@@ -52,7 +58,8 @@ create table stadiums_without_nearby_parking_new as
 SELECT stadium_polygons_new.name as stadium_name_new, parking_polygons_new.name as parking_name_new
  FROM stadium_polygons_new LEFT JOIN parking_polygons_new 
    ON ST_DWithin(stadium_polygons_new.way, parking_polygons_new.way, 100)
-   WHERE parking_polygons_new.osm_id IS NULL;   
+   WHERE parking_polygons_new.osm_id IS NULL;  
+   select * from stadiums_without_nearby_parking_new; 
 
 -- Create a table of stadiums that do not have any parking polygons with parking aisles within 100 meters (about 330 ft)
 drop table if exists stadiums_without_nearby_parking_aisles;
@@ -61,6 +68,7 @@ SELECT stadium_polygons.name as stadium_name, parking_aisles.name as parking_ais
  FROM stadium_polygons LEFT JOIN parking_aisles 
    ON ST_DWithin(stadium_polygons.way, parking_aisles.way, 100)
    WHERE parking_aisles.osm_id IS NULL;
+   select * from stadiums_without_nearby_parking_aisles;
 
 -- Create a table of stadiums that do not have any parking polygons with parking aisles within 100 meters (about 330 ft) considering new or modified since post
 drop table if exists stadiums_without_nearby_parking_aisles_new;
@@ -69,6 +77,25 @@ SELECT stadium_polygons_new.name as stadium_name_new, parking_aisles_new.name as
  FROM stadium_polygons_new LEFT JOIN parking_aisles_new 
    ON ST_DWithin(stadium_polygons_new.way, parking_aisles_new.way, 100)
    WHERE parking_aisles_new.osm_id IS NULL;
+   select * from stadiums_without_nearby_parking_aisles_new;
+
+-- Create a table of parking polygon counts near stadiums that have been added or edited since the post
+drop table if exists stadiums_new_parking;
+create table stadiums_new_parking as 
+SELECT count(*) as new_stadium_parking
+ FROM stadium_polygons LEFT JOIN parking_polygons_new 
+   ON ST_DWithin(stadium_polygons.way, parking_polygons_new.way, 100)
+   WHERE parking_polygons_new.osm_id IS NOT NULL;
+   select * from stadiums_new_parking;  
+
+-- Create a table of parking aile counts near stadiums that have been added or edited since the post
+drop table if exists stadiums_new_parking_aisles;
+create table stadiums_new_parking_aisles as 
+SELECT count(*) as new_stadium_parking_aisles
+ FROM stadium_polygons LEFT JOIN parking_aisles_new 
+   ON ST_DWithin(stadium_polygons.way, parking_aisles_new.way, 100)
+   WHERE parking_aisles_new.osm_id IS NOT NULL;
+   select * from stadiums_new_parking_aisles;     
 
 -- Create a table to store the number of stadiums and percentages with parking and parking aisles
 drop table if exists stadium_eval;
@@ -83,6 +110,7 @@ insert into stadium_eval (query_name, value) values ('stadium_without_parking_ne
 insert into stadium_eval (query_name, value) values ('stadium_without_parking_aisles_nearby_new', (select count(*) from stadiums_without_nearby_parking_aisles_new));
 insert into stadium_eval (query_name, value) values ('stadium_with_nearby_parking_pct_new', ((1 -(select value from stadium_eval where query_name = 'stadium_without_parking_nearby_new')/(select value from stadium_eval where query_name = 'stadium_polygons_new'))*100)); 
 insert into stadium_eval (query_name, value) values ('stadium_with_nearby_parking_aisles_pct_new', ((1 -(select value from stadium_eval where query_name = 'stadium_without_parking_aisles_nearby_new')/(select value from stadium_eval where query_name = 'stadium_polygons_new'))*100));
-
+insert into stadium_eval (query_name, value) values ('stadiums_new_parking', (select new_stadium_parking from stadiums_new_parking));
+insert into stadium_eval (query_name, value) values ('stadiums_new_parking_aisles', (select new_stadium_parking_aisles from stadiums_new_parking_aisles));
 
 select * from stadium_eval;
