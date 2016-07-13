@@ -27,51 +27,55 @@
             return Math.round(Math.random() * 255);
         };
         var barChartData = {
-            labels: ["Beijing", "Bengaluru", "Hong Kong", "Moscow", "Mumbai", "New Delhi", "Seoul", "Singapore", "Tokyo"],
+            labels: ["Beijing", "Bengaluru", "Hong Kong", "Mumbai", "New Delhi", "Seoul", "Singapore", "Tokyo"],
             datasets: [{
                 label: 'Airport Polygons',
                 backgroundColor: "rgba(141,211,199,0.5)",
-                data: [0,1,3,5,0,1,5,2,5]
+                data: [0,1,3,0,1,5,3,4]
             }, {
                 label: 'Apartments - Named',
                 backgroundColor: "rgba(255,255,179,0.5)",
-                data: [22,34,147,59,79,2,1696,188,588]
+                data: [22,37,211,80,2,1774,189,596]
             }, {
                 label: 'ATMs',
                 backgroundColor: "rgba(190,186,218,0.5)",
-                data: [10,50,12,104,13,13,16,26,57]
+                data: [12,56,12,20,13,17,32,61]
             }, {
                 label: 'Banks',
                 backgroundColor: "rgba(251,128,114,0.5)",
-                data: [21,47,64,212,11,18,25,16,204]
+                data: [28,50,78,11,18,33,16,213]
             }, {
                 label: 'Bike POIs',
                 backgroundColor: "rgba(128,177,211,0.5)",
-                data: [0,0,1,157,0,1,1,2,152]
+                data: [0,0,2,0,1,1,11,169]
             }, {
                 label: 'Fitness',
                 backgroundColor: "rgba(253,180,98,0.5)",
-                data: [1,2,2,33,0,2,2,0,10]  
+                data: [1,3,2,0,2,2,1,13]  
             }, {
                 label: 'Groceries',
                 backgroundColor: "rgba(179,222,105,0.5)",
-                data: [66,86,196,2078,16,9,127,66,2422]
+                data: [56,92,214,17,9,132,78,2496]
             }, {
                 label: 'Hospital Polygons',
                 backgroundColor: "rgba(252,205,229,0.5)",
-                data: [11,28,58,70,6,13,20,5,95]
+                data: [11,29,61,8,13,20,6,101]
             }, {
                 label: 'Lodging',
                 backgroundColor: "rgba(217,217,217,0.5)",
-                data: [67,41,95,110,16,43,53,57,246]
+                data: [78,47,129,19,46,56,91,257]
             }, {
                 label: 'School Polygons',
                 backgroundColor: "rgba(188,128,189,0.5)",
-                data: [104,141,271,1279,18,52,534,72,920]  
+                data: [106,149,350,23,57,557,77,945]  
             }, {
-                label: 'Stadium Polygons',
+                label: 'Stadium Parking Lots',
                 backgroundColor: "rgba(204,235,197,0.5)",
-                data: [4,0,21,19,3,3,9,4,21]            
+                data: [0,0,6,0,0,0,1,19] 
+            }, {
+                label: 'Stadium Parking Aisles',
+                backgroundColor: "rgba(204,235,197,0.5)",
+                data: [0,0,6,0,0,2,0,0]               
             }]
         };
         window.onload = function() {
