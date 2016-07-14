@@ -8,7 +8,7 @@
                 font-size:10px;
             }
             .iframetab {
-                width:75%;
+                width:100%;
                 height:auto;
                 border:0px;
                 margin:0px;
@@ -47,7 +47,7 @@
                         html.push('<div class="openout"><a href="' + url + '"><img src="data/world.png" border="0" alt="Open" title="Launch Full Screen" /></a></div><iframe class="iframetab" src="' + url + '">Load Failed?</iframe>');
                         html.push('</div>');
                         $(tab).append(html.join(""));
-                        $(tab).find("iframe").height($(window).height()-80);
+                        $(tab).find("iframe").height($(window).height()-500);
                     }
                     return false;
                 }
