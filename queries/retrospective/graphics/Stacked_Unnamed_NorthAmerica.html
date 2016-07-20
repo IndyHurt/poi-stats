@@ -50,6 +50,7 @@
                 data: [7.9,3.1,1.8,3.6,2.4,11.5,4.8,3.3,3.6,37.1,2.5,4.4,1.9,16.3,1.4,4.9,2.7,1.4,1.09,3.4,8.8,0.2]            
             }]
         };
+        Chart.defaults.global.defaultFontSize = 11;
         window.onload = function() {
             var ctx = document.getElementById("canvas").getContext("2d");
             window.myBar = new Chart(ctx, {
