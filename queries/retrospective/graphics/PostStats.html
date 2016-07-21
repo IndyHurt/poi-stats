@@ -52,14 +52,14 @@
 
       var options = {
           title : 'Targeted Editing Post Stats',
-          hAxis: { textStyle : { fontSize: 9}},
+          hAxis: {slantedText:true, slantedTextAngle:50, textStyle : { fontSize: 12} },
           vAxes: {
           0: { viewWindow: { min: 0}, title: 'Tiles Served and Page Views'}, 
           1: { viewWindow: { min: 0}, title: 'Average Time on Page (minutes)'}
         },
           seriesType: 'bars',
           isStacked: 'true',
-          colors: ['#C0D8E9', '#FEDAB1', '#191919'], 
+          colors: ['#5a5974', '#ea7f05', '#191919'], 
           series: {
            2: { targetAxisIndex: 1, type: 'line', curveType: 'function', lineWidth: 3, lineDashStyle: [2, 1, 2]}},
           legend: { position: 'bottom', textStyle: {fontSize: 13}}
