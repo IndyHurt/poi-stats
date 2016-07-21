@@ -1,90 +1,98 @@
-<!doctype html>
 <html>
-
 <head>
-    <title>North America Unnamed Roads</title>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
-    <style>
-    canvas {
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawNARoadChart);
+      function drawNARoadChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Metro', 'Unnamed Motorway', 'Unnamed Primary', 'Unnamed Secondary', 'Unnamed Tertiary', 'Unnamed Residential'],
+          ['Atlanta',0.003,0.002,0.03,0.08,7.9],
+          ['Boston',0.006,0.01,0.2,0.08,3.1],
+          ['Chicago',0.006,0.003,0.007,0.03,1.8],
+          ['DC',0.009,0.01,0.007,0.05,3.6],
+          ['Detroit',0.006,0.0004,0.008,0.03,2.8],
+          ['Houston',0.002,0.03,0.07,0.1,11.5],
+          ['Indianapolis',0.01,0.001,0.03,0.06,4.8],
+          ['Jacksonville',0.02,0.008,0.01,0.07,3.3],
+          ['Los Angeles',0.0009,0.007,0.01,0.04,3.6],
+          ['Mexico City',0.04,0.7,2.2,2.7,37.1],
+          ['Miami',,0.006,0.01,0.06,2.5],
+          ['Minneapolis / Saint Paul',0.007,0.004,0.005,0.08,4.4],
+          ['Montreal',0.007,0.004,0.06,1.7,1.9],
+          ['New Orleans',0,0.001,0.02,0.1,16.3],
+          ['New York',0.006,0.01,0.05,0.09,1.4],
+          ['Phoenix',0.0003,0.008,0.03,0.1,4.9],
+          ['Portland OR',0,0,0.005,0.02,2.7],
+          ['San Diego',0.003,0.003,0.02,0.01,1.4],
+          ['San Francisco',0.0003,0.003,0.02,0.02,1.1],
+          ['Tampa',0,0.06,0.009,0.04,3.4],
+          ['Tucson',0,0,0.002,0.1,8.8],
+          ['Vancouver BC',0,0.003,0.06,0.006,0.2]
+        ]);
+        var options = {
+          title: 'Percent Unnamed by Road Type - North America',
+          hAxis: {slantedText:true, slantedTextAngle:50 },
+          isStacked: true,
+          colors: ['#8dd3c7', '#5a5974', '#bebada', '#fb8072', '#80b1d3'],
+          legend: { textStyle : { fontSize: 12}},
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divNaRoad'));
+        chart.draw(data, options);
+
+    var columns = [];
+    var series = {};
+    for (var i = 0; i < data.getNumberOfColumns(); i++) {
+        columns.push(i);
+        if (i > 0) {
+            series[i - 1] = {};
+        }
     }
-    </style>
-</head>
-
-<body>
-    <div style="width: 75%">
-        <canvas id="canvas"></canvas>
-    </div>
     
-    <script>
-        var randomScalingFactor = function() {
-            return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-        };
-        var randomColorFactor = function() {
-            return Math.round(Math.random() * 255);
-        };
-        var barChartData = {
-            labels: ["Atlanta", "Boston", "Chicago", "DC", "Detroit", "Houston", "Indianapolis", "Jacksonville", "Los Angeles", "Mexico City", "Miami","Minneapolis / St Paul", "Montreal", "New Orleans", "New York City", "Phoenix", "Portland OR", "San Diego", "San Francisco", "Tampa", "Tucson", "Vancouver"],
-            datasets: [{
-                label: 'Unnamed Motorway',
-                backgroundColor: "rgba(141,211,199,0.5)",
-                data: [0.003,0.006,0.006,0.009,0.006,0.002,0.01,0.02,0.0009,0.04,0,0.007,0.007,0,0.006,0.0003,0,0.003,0.0003,0,0,0]
-            }, {
-                label: 'Unnamed Primary',
-                backgroundColor: "rgba(255,255,179,0.5)",
-                data: [0.002,0.01,0.003,0.01,0.0004,0.03,0.001,0.008,0.007,0.7,0.006,0.004,0.004,0.001,0.01,0.008,0,0.003,0.003,0.06,0,0.003]
-            }, {
-                label: 'Unnamed Secondary',
-                backgroundColor: "rgba(190,186,218,0.5)",
-                data: [0.03,0.2,0.007,0.007,0.008,0.07,0.03,0.01,0.01,2.2,0.01,0.005,0.06,0.02,0.05,0.03,0.005,0.02,0.02,0.009,0.002,0.06]
-            }, {
-                label: 'Unnamed Tertiary',
-                backgroundColor: "rgba(251,128,114,0.5)",
-                data: [0.08,0.08,0.03,0.05,0.03,0.1,0.06,0.07,0.04,2.7,0.06,0.08,1.7,0.1,0.09,0.1,0.02,0.01,0.02,0.04,0.1,0.006]
-            }, {
-                label: 'Unnamed Residential',
-                backgroundColor: "rgba(128,177,211,0.5)",
-                data: [7.9,3.1,1.8,3.6,2.4,11.5,4.8,3.3,3.6,37.1,2.5,4.4,1.9,16.3,1.4,4.9,2.7,1.4,1.09,3.4,8.8,0.2]            
-            }]
-        };
-        Chart.defaults.global.defaultFontSize = 11;
-        window.onload = function() {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myBar = new Chart(ctx, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    title:{
-                        display:true,
-                        text:"Percent Unnamed by Road Type - North America"
-                    },
-                    tooltips: {
-                        mode: 'label'
-                    },
-                    responsive: true,
-                    scales: {
-                        xAxes: [{
-                            stacked: true,
-                        }],
-                        yAxes: [{
-                            stacked: true
-                        }]
-                    }
+    // var options = {
+    //     width: 600,
+    //     height: 400,
+    //     series: series
+    // }
+    
+    google.visualization.events.addListener(chart, 'select', function () {
+        var sel = chart.getSelection();
+        // if selection length is 0, we deselected an element
+        if (sel.length > 0) {
+            // if row is undefined, we clicked on the legend
+            if (sel[0].row === null) {
+                var col = sel[0].column;
+                if (columns[col] == col) {
+                    // hide the data series
+                    columns[col] = {
+                        label: data.getColumnLabel(col),
+                        type: data.getColumnType(col),
+                        calc: function () {
+                            return null;
+                        }
+                    };
+                    
+                    // grey out the legend entry
+                    series[col - 1].color = '#000000';
                 }
-            });
-        };
-        $('#randomizeData').click(function() {
-            $.each(barChartData.datasets, function(i, dataset) {
-                dataset.backgroundColor = 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',.7)';
-                dataset.data = [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()];
-            });
-            window.myBar.update();
-        });
-    </script>
-    <p><font size="2" face="verdana" color="grey"><i>Based on <a href="https://mapzen.com/data/metro-extracts/">Metro Extract Data</a> made available on July 16th, 2016.</i></p>
-</body>
+                else {
+                    // show the data series
+                    columns[col] = col;
+                    series[col - 1].color = null;
+                }
+                var view = new google.visualization.DataView(data);
+                view.setColumns(columns);
+                chart.draw(view, options);
+            }
+        }
+    });
+      
+      }
+</script>
+  </head>
+  <body>
+    <div id="chart_divNaRoad" style="width: 900px; height: 500px;"></div>
 
+   
+  </body>
 </html>

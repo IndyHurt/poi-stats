@@ -3,8 +3,8 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
+      google.setOnLoadCallback(drawEUpoiChart);
+      function drawEUpoiChart() {
         var data = google.visualization.arrayToDataTable([
           ['Metro', 'Airport Polygons', 'Apartments - Named', 'ATMs', 'Banks', 'Bike POIs', 'Fitness', 'Groceries', 'Hospital Polygons', 'Lodging', 'School Polygons', 'Stadium Parking Lots', 'Stadium Parking Aisles'],
           ['Amsterdam',1,52,14,13,36,6,115,9,76,47,0,2],
@@ -19,12 +19,12 @@
         ]);
         var options = {
           title: 'New or Modified Since Targeted Editing Blog Post - Europe',
-          hAxis: { textStyle : { fontSize: 10}},
+          hAxis: {slantedText:true, slantedTextAngle:50 },
           isStacked: true,
-          colors: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'],
-          legend: { textStyle : { fontSize: 10}},
+          colors: ['#8dd3c7', '#5a5974', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'],
+          legend: { textStyle : { fontSize: 12}},
         };
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_divEuPoi'));
         chart.draw(data, options);
 
     var columns = [];
@@ -78,7 +78,7 @@
 </script>
   </head>
   <body>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <div id="chart_divEuPoi" style="width: 900px; height: 500px;"></div>
 
    
   </body>
