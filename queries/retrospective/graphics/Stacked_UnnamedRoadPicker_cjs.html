@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <script type="text/javascript" src="data/js/jquery.js"></script>
+        <script type="text/javascript" src="data/js/jquery-ui.js"></script>
+        <link href="data/css/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+        <style>
+            html {
+                font-size:10px;
+            }
+            .iframetab {
+                width:100%;
+                height:auto;
+                border:0px;
+                margin:0px;
+                position:relative;
+                top:-13px;
+            }
+            .ui-tabs-panel {
+                padding:5px !important;
+                width:100%;
+                height:90%;
+            }
+            .openout {
+                float:right;
+                position:relative;
+                top:-28px;
+                left:-5px;
+            }
+        </style>
+        <script>
+            $(document).ready(function() {
+                var $tabs = $('#tabs').tabs();
+                //get selected tab
+                function getSelectedTabIndex() {
+                    return $tabs.tabs('option', 'active');
+                }
+                //get tab contents
+                beginTab = $("#tabs ul li:eq(" + getSelectedTabIndex() + ")").find("a");
+                loadTabFrame($(beginTab).attr("href"),$(beginTab).attr("rel"));
+                $("a.tabref").click(function() {
+                    loadTabFrame($(this).attr("href"),$(this).attr("rel"));
+                });
+                //tab switching function
+                function loadTabFrame(tab, url) {
+                    if ($(tab).find("iframe").length == 0) {
+                        var html = [];
+                        html.push('<div class="tabIframeWrapper">');
+                        html.push('<div class="openout"><a href="' + url + '"><img src="data/world.png" border="0" alt="Open" title="Launch Full Screen" /></a></div><iframe class="iframetab" src="' + url + '">Load Failed?</iframe>');
+                        html.push('</div>');
+                        $(tab).append(html.join(""));
+                        $(tab).find("iframe").height($(window).height()-80);
+                    }
+                    return false;
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div id="tabs">
+            <ul>
+                <li><a class="tabref" href="#tabs-1" rel="https://indyhurt.github.io/poi-stats/queries/retrospective/graphics/Stacked_Unnamed_NorthAmerica_cjs.html">Unnamed Roads - North America</a></li>
+                <li><a class="tabref" href="#tabs-2" rel="https://indyhurt.github.io/poi-stats/queries/retrospective/graphics/Stacked_Unnamed_Europe_cjs.html">Unnamed Roads - Europe</a></li>
+                <li><a class="tabref" href="#tabs-3" rel="https://indyhurt.github.io/poi-stats/queries/retrospective/graphics/Stacked_Unnamed_Asia_cjs.html">Unnamed Roads - Asia</a></li>
+            </ul>
+            <div id="tabs-1" class="tabMain">
+            </div>
+            <div id="tabs-2">
+            </div>
+            <div id="tabs-3">
+            </div>
+        </div>
+        <p><i>emoticons courtesy of <a href="http://emojione.com">Emoji One</a></i></p> 
+    </body>
+</html>
