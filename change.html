@@ -210,7 +210,7 @@
           curveType: 'function',
           legend: { position: 'right' },
           hAxis: {
-            title: 'Country',
+            title: 'Countries ordered by Growth Rate',
             textStyle: {
               color:'#525b60',
               fontSize:6
@@ -230,6 +230,70 @@
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
         chart.draw(data, options);
+
+        var columns = [];
+        var series = {};
+        for (var i = 0; i < data.getNumberOfColumns(); i++) {
+            columns.push(i);
+            if (i > 0) {
+                series[i - 1] = {};
+        }
+    }
+    
+     var options = {
+         title: 'Growth Rate & Percent Change of OSM Road Length Compared to World FactBook',
+          colors: ['#FF6600', '#00A3C1'],
+          curveType: 'function',
+          series: series,
+          legend: { position: 'right' },
+          hAxis: {
+            title: 'Countries ordered by Growth Rate',
+            textStyle: {
+              color:'#525b60',
+              fontSize:6
+            },
+          },
+          vAxis: { 
+            title: 'Percentage',
+            minValue:0,
+            viewWindow: {
+              min: 0
+            } 
+          }
+     };
+    
+    google.visualization.events.addListener(chart, 'select', function () {
+        var sel = chart.getSelection();
+        // if selection length is 0, we deselected an element
+        if (sel.length > 0) {
+            // if row is undefined, we clicked on the legend
+            if (sel[0].row === null) {
+                var col = sel[0].column;
+                if (columns[col] == col) {
+                    // hide the data series
+                    columns[col] = {
+                        label: data.getColumnLabel(col),
+                        type: data.getColumnType(col),
+                        calc: function () {
+                            return null;
+                        }
+                    };
+                    
+                    // grey out the legend entry
+                    series[col - 1].color = '#000000';
+                }
+                else {
+                    // show the data series
+                    columns[col] = col;
+                    series[col - 1].color = null;
+                }
+                var view = new google.visualization.DataView(data);
+                view.setColumns(columns);
+                chart.draw(view, options);
+            }
+        }
+    });
+
       }
     </script>
   </head>
